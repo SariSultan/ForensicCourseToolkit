@@ -1,0 +1,17 @@
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\bin\Debug\ForensicsCourseToolkit.exe.config
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\bin\Debug\ForensicsCourseToolkit.exe
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\bin\Debug\ForensicsCourseToolkit.pdb
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\bin\Debug\FlatTabControl.dll
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\bin\Debug\System.Windows.Forms.Ribbon35.dll
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.AboutFrm.resources
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.CovertersFrm.resources
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.mainFrm.resources
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.bootSectorFrm.resources
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.mbrFrm.resources
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.Properties.Resources.resources
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.csproj.GenerateResource.Cache
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.exe
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.pdb
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.csprojResolveAssemblyReference.cache
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.fatFrm.resources
+E:\Forensics course\ForensicsCourseToolkit\ForensicsCourseToolkit\obj\Debug\ForensicsCourseToolkit.NTFSBootSectorFrm.resources
