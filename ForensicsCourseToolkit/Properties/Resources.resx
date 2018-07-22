@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FatIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FatIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="QuizMakerIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QuizMaker.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FCTAboutPage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FCTAboutPage1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MbrIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MbrIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BootSectorIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BootSectorIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -130,22 +130,22 @@
   <data name="BeHexEditorLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BeHexEditorLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Down_Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Down_Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MbrIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MbrIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NTFSIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NTFSIcon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ConvertersIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ConvertersIcon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FCTBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FCTBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Down_Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Down_Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FatIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FatIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="x_ribbon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\x_ribbon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FatIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FatIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ntfslearningIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ntfslearningIcon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

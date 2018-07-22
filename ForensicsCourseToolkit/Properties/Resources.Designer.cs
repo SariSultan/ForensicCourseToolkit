@@ -103,16 +103,6 @@ namespace ForensicsCourseToolkit.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FatIcon {
-            get {
-                object obj = ResourceManager.GetObject("FatIcon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap FatIcon1 {
             get {
                 object obj = ResourceManager.GetObject("FatIcon1", resourceCulture);
@@ -123,29 +113,39 @@ namespace ForensicsCourseToolkit.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FCTAboutPage1 {
-            get {
-                object obj = ResourceManager.GetObject("FCTAboutPage1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap FCTBackground {
-            get {
-                object obj = ResourceManager.GetObject("FCTBackground", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap MbrIcon1 {
             get {
                 object obj = ResourceManager.GetObject("MbrIcon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NTFSIcon {
+            get {
+                object obj = ResourceManager.GetObject("NTFSIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ntfslearningIcon {
+            get {
+                object obj = ResourceManager.GetObject("ntfslearningIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap QuizMakerIcon {
+            get {
+                object obj = ResourceManager.GetObject("QuizMakerIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

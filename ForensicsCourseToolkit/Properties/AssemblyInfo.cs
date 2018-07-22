@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ForensicsCourseToolkit")]
 [assembly: AssemblyDescription("Forensic Course Project - Sari Sultan")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Kuwait University - Dr. Ayed Salman")]
-[assembly: AssemblyProduct("ForensicsCourseToolkit")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("Sari Sultan")]
+[assembly: AssemblyProduct("FCT")]
+[assembly: AssemblyCopyright("Copyright © Sari Sultan")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("3.0.0.0")]
+[assembly: AssemblyFileVersion("3.0.0.0")]

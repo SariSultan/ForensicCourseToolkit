@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ForensicsCourseToolkit</RootNamespace>
     <AssemblyName>ForensicsCourseToolkit</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -25,12 +25,12 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -38,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,19 +48,57 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>KU_ICON.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>Custom</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>0078FC671860F0BB916EBCEFC7E6E33F8367DA88</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ForensicsCourseToolkit_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ForensicsCourseToolkit_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.2.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.2\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DeviceIOControlLib">
+      <HintPath>..\Dependencies\DeviceIOControlLib.dll</HintPath>
+    </Reference>
     <Reference Include="FlatTabControl, Version=1.0.4984.17992, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\FlatTabControl.dll</HintPath>
     </Reference>
+    <Reference Include="RawDiskLib">
+      <HintPath>..\Dependencies\RawDiskLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Scs">
+      <HintPath>..\Dependencies\Scs.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms.Ribbon35">
-      <HintPath>..\Dependencies\System.Windows.Forms.Ribbon35.dll</HintPath>
+    <Reference Include="System.Windows.Forms.Ribbon">
+      <HintPath>..\Dependencies\System.Windows.Forms.Ribbon.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -71,96 +110,231 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutFrm.cs">
+    <Compile Include="Framework_Project\AboutFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutFrm.Designer.cs">
+    <Compile Include="Framework_Project\AboutFrm.Designer.cs">
       <DependentUpon>AboutFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Filesystems\NTFSBootSector.cs" />
-    <Compile Include="NTFSBootSectorFrm.cs">
+    <Compile Include="Framework_Project\Compression\CompressionHelper.cs" />
+    <Compile Include="Framework_Project\Security\Crypto\Crypto.cs" />
+    <Compile Include="Framework_Project\Examination\ExamGradingFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NTFSBootSectorFrm.Designer.cs">
+    <Compile Include="Framework_Project\Examination\ExamGradingFrm.Designer.cs">
+      <DependentUpon>ExamGradingFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework_Project\Examination\ExaminationFlowLayoutHelper.cs" />
+    <Compile Include="Framework_Project\Examination\ExaminationWindowFromFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework_Project\Examination\ExaminationWindowFromFile.Designer.cs">
+      <DependentUpon>ExaminationWindowFromFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework_Project\Examination\ExaminationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework_Project\Examination\ExaminationWindow.Designer.cs">
+      <DependentUpon>ExaminationWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework_Project\Examination\ExamServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework_Project\Examination\ExamServer.Designer.cs">
+      <DependentUpon>ExamServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework_Project\Examination\PerformanceTesting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework_Project\Examination\PerformanceTesting.Designer.cs">
+      <DependentUpon>PerformanceTesting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework_Project\NetworkExamInterface.cs" />
+    <Compile Include="Framework_Project\Security\ExaminationStudentsFilter.cs" />
+    <Compile Include="Framework_Project\Serialization\SerializationHelper.cs" />
+    <Compile Include="NTFS_PROJECT_1\NTFSFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_1\NTFSFrm.Designer.cs">
+      <DependentUpon>NTFSFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\AttributeList.cs" />
+    <Compile Include="NTFS_PROJECT_2\CalculationUtilities.cs" />
+    <Compile Include="NTFS_PROJECT_2\DisplayAttributeDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\DisplayAttributeDetails.Designer.cs">
+      <DependentUpon>DisplayAttributeDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\DisplayAttributes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\DisplayAttributes.Designer.cs">
+      <DependentUpon>DisplayAttributes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\FileName.cs" />
+    <Compile Include="NTFS_PROJECT_1\NTFSBootSector.cs" />
+    <Compile Include="NTFS_PROJECT_2\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\IndexEntry..cs" />
+    <Compile Include="NTFS_PROJECT_2\INDEX_ALLOCATION.cs" />
+    <Compile Include="NTFS_PROJECT_2\INDEX_ROOT.cs" />
+    <Compile Include="NTFS_PROJECT_2\MainForm_NTFSLearning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\MainForm_NTFSLearning.Designer.cs">
+      <DependentUpon>MainForm_NTFSLearning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FAT_PROJECT\fatQuizFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FAT_PROJECT\fatQuizFrm.Designer.cs">
+      <DependentUpon>fatQuizFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_2\MFT_Attribute.cs" />
+    <Compile Include="NTFS_PROJECT_2\MFT_Attribute_Header.cs" />
+    <Compile Include="NTFS_PROJECT_2\MFT_Attribute_Header_non_resident.cs" />
+    <Compile Include="NTFS_PROJECT_2\MFT_Attribute_Header_Resident.cs" />
+    <Compile Include="NTFS_PROJECT_2\NTFSBootSector.cs" />
+    <Compile Include="NTFS_PROJECT_1\NTFSBootSectorFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NTFS_PROJECT_1\NTFSBootSectorFrm.Designer.cs">
       <DependentUpon>NTFSBootSectorFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="fatFrm.cs">
+    <Compile Include="FAT_PROJECT\fatFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fatFrm.Designer.cs">
+    <Compile Include="FAT_PROJECT\fatFrm.Designer.cs">
       <DependentUpon>fatFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CovertersFrm.cs">
+    <Compile Include="Common\CovertersFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CovertersFrm.Designer.cs">
+    <Compile Include="Common\CovertersFrm.Designer.cs">
       <DependentUpon>CovertersFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Filesystems\BootSector.cs" />
-    <Compile Include="Filesystems\Common.cs" />
-    <Compile Include="Filesystems\FATDirectoryArea.cs" />
-    <Compile Include="Filesystems\FatTable.cs" />
-    <Compile Include="Filesystems\FatType.cs" />
-    <Compile Include="Filesystems\FileAttribute.cs" />
-    <Compile Include="Filesystems\IHaveCommonProps.cs" />
-    <Compile Include="Filesystems\IHaveExactSize.cs" />
-    <Compile Include="Filesystems\IHaveReservedAreaBeforeStructure.cs" />
-    <Compile Include="Filesystems\IHaveStartAddress.cs" />
-    <Compile Include="Filesystems\IHaveStructure.cs" />
-    <Compile Include="Filesystems\Mbr.cs" />
-    <Compile Include="Filesystems\StructureUnit.cs" />
-    <Compile Include="Filesystems\UnitType.cs" />
-    <Compile Include="Filesystems\Vbr.cs" />
-    <Compile Include="Helpers\Conversion.cs" />
-    <Compile Include="Helpers\HexPrinter.cs" />
-    <Compile Include="Helpers\Logger.cs" />
-    <Compile Include="Helpers\Printer.cs" />
-    <Compile Include="LogMsgType.cs" />
-    <Compile Include="mainFrm.cs">
+    <Compile Include="Common\BootSector.cs" />
+    <Compile Include="Common\Common.cs" />
+    <Compile Include="FAT_PROJECT\FATDirectoryArea.cs" />
+    <Compile Include="FAT_PROJECT\FatTable.cs" />
+    <Compile Include="FAT_PROJECT\FatType.cs" />
+    <Compile Include="Common\FileAttribute.cs" />
+    <Compile Include="Common\IHaveCommonProps.cs" />
+    <Compile Include="Common\IHaveExactSize.cs" />
+    <Compile Include="Common\IHaveReservedAreaBeforeStructure.cs" />
+    <Compile Include="Common\IHaveStartAddress.cs" />
+    <Compile Include="Common\IHaveStructure.cs" />
+    <Compile Include="Common\Mbr.cs" />
+    <Compile Include="Common\StructureUnit.cs" />
+    <Compile Include="Common\UnitType.cs" />
+    <Compile Include="Common\Vbr.cs" />
+    <Compile Include="Common\Helpers\Conversion.cs" />
+    <Compile Include="Common\Helpers\HexPrinter.cs" />
+    <Compile Include="Common\Helpers\Logger.cs" />
+    <Compile Include="Common\Helpers\Printer.cs" />
+    <Compile Include="Framework_Project\LogMsgType.cs" />
+    <Compile Include="Framework_Project\mainFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mainForm.Designer.cs">
+    <Compile Include="Framework_Project\mainForm.Designer.cs">
       <DependentUpon>mainFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="bootSectorFrm.cs">
+    <Compile Include="FAT_PROJECT\bootSectorFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="bootSectorFrm.Designer.cs">
+    <Compile Include="FAT_PROJECT\bootSectorFrm.Designer.cs">
       <DependentUpon>bootSectorFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="mbrFrm.cs">
+    <Compile Include="FAT_PROJECT\mbrFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mbrFrm.Designer.cs">
+    <Compile Include="FAT_PROJECT\mbrFrm.Designer.cs">
       <DependentUpon>mbrFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="NTFS_PROJECT_2\NTFS_MFTHeader_Reader.cs" />
+    <Compile Include="NTFS_PROJECT_2\NTFS_MFT_Entry_Reader.cs" />
+    <Compile Include="NTFS_PROJECT_2\Object_ID.cs" />
+    <Compile Include="Framework_Project\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RtbExtensions.cs" />
-    <EmbeddedResource Include="AboutFrm.resx">
+    <Compile Include="Framework_Project\Quizez\ExamHelper.cs" />
+    <Compile Include="Framework_Project\Quizez\FATFileSystemExamTemplate.cs" />
+    <Compile Include="Framework_Project\Quizez\QuizHelper.cs" />
+    <Compile Include="NTFS_PROJECT_2\REPARSE_POINT.cs" />
+    <Compile Include="Framework_Project\RtbExtensions.cs" />
+    <Compile Include="NTFS_PROJECT_2\RunList.cs" />
+    <Compile Include="NTFS_PROJECT_2\STANDARD_INFORMATION.cs" />
+    <Compile Include="NTFS_PROJECT_2\VOLUME_INFORMATION.cs" />
+    <EmbeddedResource Include="Framework_Project\AboutFrm.resx">
       <DependentUpon>AboutFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NTFSBootSectorFrm.resx">
+    <EmbeddedResource Include="Framework_Project\Examination\ExamGradingFrm.resx">
+      <DependentUpon>ExamGradingFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework_Project\Examination\ExaminationWindowFromFile.resx">
+      <DependentUpon>ExaminationWindowFromFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework_Project\Examination\ExaminationWindow.resx">
+      <DependentUpon>ExaminationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework_Project\Examination\ExamServer.resx">
+      <DependentUpon>ExamServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework_Project\Examination\PerformanceTesting.resx">
+      <DependentUpon>PerformanceTesting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NTFS_PROJECT_1\NTFSFrm.resx">
+      <DependentUpon>NTFSFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NTFS_PROJECT_2\DisplayAttributeDetails.resx">
+      <DependentUpon>DisplayAttributeDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NTFS_PROJECT_2\DisplayAttributes.resx">
+      <DependentUpon>DisplayAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NTFS_PROJECT_2\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NTFS_PROJECT_2\Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NTFS_PROJECT_2\MainForm_NTFSLearning.resx">
+      <DependentUpon>MainForm_NTFSLearning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FAT_PROJECT\fatQuizFrm.resx">
+      <DependentUpon>fatQuizFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NTFS_PROJECT_1\NTFSBootSectorFrm.resx">
       <DependentUpon>NTFSBootSectorFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fatFrm.resx">
+    <EmbeddedResource Include="FAT_PROJECT\fatFrm.resx">
       <DependentUpon>fatFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CovertersFrm.resx">
+    <EmbeddedResource Include="Common\CovertersFrm.resx">
       <DependentUpon>CovertersFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="mainFrm.resx">
+    <EmbeddedResource Include="Framework_Project\mainFrm.resx">
       <DependentUpon>mainFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="bootSectorFrm.resx">
+    <EmbeddedResource Include="FAT_PROJECT\bootSectorFrm.resx">
       <DependentUpon>bootSectorFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="mbrFrm.resx">
+    <EmbeddedResource Include="FAT_PROJECT\mbrFrm.resx">
       <DependentUpon>mbrFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -168,6 +342,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ForensicsCourseToolkit_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -201,8 +378,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="KU_ICON.ico" />
+    <None Include="Resources\ntfslearningIcon.jpg" />
+    <None Include="Resources\kulogo1.png" />
+    <None Include="Resources\kulogo.jpg" />
+    <None Include="Resources\Image1.png" />
+    <None Include="Resources\NTFSIcon.jpg" />
+    <None Include="Resources\QuizMaker.jpg" />
     <None Include="Resources\FatIcon1.png" />
-    <None Include="Resources\FatIcon.png" />
     <None Include="Resources\BootSectorIcon.png" />
     <None Include="Resources\ConvertersIcon.jpg" />
   </ItemGroup>
