@@ -39,8 +39,8 @@ namespace ForensicsCourseToolkit
             Application.SetCompatibleTextRenderingDefault(false);
 
         //  TestLibraries();
-           //  Application.Run(new mainFrm());
-            Application.Run(new Framework_Project.Examination.PerformanceTesting());
+           Application.Run(new mainFrm());
+           // Application.Run(new Framework_Project.Examination.PerformanceTesting());
         }
 
         private static void TestLibraries(bool testCompression = true, bool testEncryption = true)
