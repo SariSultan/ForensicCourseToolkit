@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Exam xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <QuestionsList>
+    <Question xsi:type="MultipleChoiceQuestion">
+      <QuestionNumber>1</QuestionNumber>
+      <Description>Value of disk signature for MBR</Description>
+      <Asset> Removed for space. </Asset>
+      <Answer>55AA</Answer>
+      <AnswerExplanation>The value of disk signature always 55AA, 
+	  check MBR strcture last field</AnswerExplanation>
+      <Choices>
+        <string>55BB</string>
+        <string>AA55</string>
+        <string>55AA</string>
+        <string>BB55</string>
+      </Choices>
+      <Grades>1</Grades>
+      <Difficulty>Easy</Difficulty>
+    </Question>    
+  </QuestionsList>
+  <ExamDescription>Exam 1</ExamDescription>
+  <ExamDuration>30</ExamDuration>
+</Exam>

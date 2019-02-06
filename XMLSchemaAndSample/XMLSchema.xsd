@@ -1,0 +1,37 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Exam">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="QuestionsList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Question">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:byte" name="QuestionNumber"/>
+                    <xs:element type="xs:string" name="Description"/>
+                    <xs:element type="xs:string" name="Asset"/>
+                    <xs:element type="xs:string" name="Answer"/>
+                    <xs:element type="xs:string" name="AnswerExplanation"/>
+                    <xs:element name="Choices">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="string" maxOccurs="unbounded" minOccurs="0"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:byte" name="Grades"/>
+                    <xs:element type="xs:string" name="Difficulty"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:string" name="ExamDescription"/>
+        <xs:element type="xs:byte" name="ExamDuration"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
