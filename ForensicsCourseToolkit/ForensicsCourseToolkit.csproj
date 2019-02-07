@@ -110,6 +110,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Helpers\StringHexPrinter.cs" />
+    <Compile Include="Common\IHaveBootSectorParent.cs" />
+    <Compile Include="Common\VbrHelpers.cs" />
     <Compile Include="Framework_Project\AboutFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,7 +120,21 @@
       <DependentUpon>AboutFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Framework_Project\Compression\CompressionHelper.cs" />
-    <Compile Include="Framework_Project\Security\Crypto\Crypto.cs" />
+    <Compile Include="Framework_Project\Examination\GradingExamHelper.cs" />
+    <Compile Include="Framework_Project\INetworkExamService.cs" />
+    <Compile Include="Framework_Project\INetworkExamServiceTesting.cs" />
+    <Compile Include="Framework_Project\NetworkExamService.cs" />
+    <Compile Include="Framework_Project\NetworkExamServicePerformanceTesting.cs" />
+    <Compile Include="Framework_Project\Quizez\Exam.cs" />
+    <Compile Include="Framework_Project\Quizez\InvalidInstructorPasswordException.cs" />
+    <Compile Include="Framework_Project\Quizez\InvalidStudentPasswordException.cs" />
+    <Compile Include="Framework_Project\Quizez\MultipleChoiceQuestion.cs" />
+    <Compile Include="Framework_Project\Quizez\Question.cs" />
+    <Compile Include="Framework_Project\Quizez\QuestionForms.cs" />
+    <Compile Include="Framework_Project\Quizez\TrueFalseQuestion.cs" />
+    <Compile Include="Framework_Project\Quizez\ValueInputQuestion.cs" />
+    <Compile Include="Framework_Project\RequiredDetails.cs" />
+    <Compile Include="Framework_Project\Security\Crypto\AESGCM.cs" />
     <Compile Include="Framework_Project\Examination\ExamGradingFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,9 +166,16 @@
     <Compile Include="Framework_Project\Examination\PerformanceTesting.Designer.cs">
       <DependentUpon>PerformanceTesting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Framework_Project\NetworkExamInterface.cs" />
+    <Compile Include="Framework_Project\ExamStatusUpdate.cs" />
+    <Compile Include="Framework_Project\Security\ExaminationFilterRule.cs" />
     <Compile Include="Framework_Project\Security\ExaminationStudentsFilter.cs" />
+    <Compile Include="Framework_Project\Security\FilterationRequestResult.cs" />
+    <Compile Include="Framework_Project\Security\FilterationResult.cs" />
+    <Compile Include="Framework_Project\Security\FilterationSecurityLevel.cs" />
+    <Compile Include="Framework_Project\Security\InstructorValidationData.cs" />
+    <Compile Include="Framework_Project\Security\TrackingEntry.cs" />
     <Compile Include="Framework_Project\Serialization\SerializationHelper.cs" />
+    <Compile Include="Framework_Project\UpdateStatusDelegate.cs" />
     <Compile Include="NTFS_PROJECT_1\NTFSFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,7 +210,7 @@
     <Compile Include="NTFS_PROJECT_2\Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="NTFS_PROJECT_2\IndexEntry..cs" />
+    <Compile Include="NTFS_PROJECT_2\IndexEntry.cs" />
     <Compile Include="NTFS_PROJECT_2\INDEX_ALLOCATION.cs" />
     <Compile Include="NTFS_PROJECT_2\INDEX_ROOT.cs" />
     <Compile Include="NTFS_PROJECT_2\MainForm_NTFSLearning.cs">
@@ -195,11 +219,11 @@
     <Compile Include="NTFS_PROJECT_2\MainForm_NTFSLearning.Designer.cs">
       <DependentUpon>MainForm_NTFSLearning.cs</DependentUpon>
     </Compile>
-    <Compile Include="FAT_PROJECT\fatQuizFrm.cs">
+    <Compile Include="FAT_PROJECT\MbrQuizFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FAT_PROJECT\fatQuizFrm.Designer.cs">
-      <DependentUpon>fatQuizFrm.cs</DependentUpon>
+    <Compile Include="FAT_PROJECT\MbrQuizFrm.Designer.cs">
+      <DependentUpon>MbrQuizFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="NTFS_PROJECT_2\MFT_Attribute.cs" />
     <Compile Include="NTFS_PROJECT_2\MFT_Attribute_Header.cs" />
@@ -316,8 +340,8 @@
     <EmbeddedResource Include="NTFS_PROJECT_2\MainForm_NTFSLearning.resx">
       <DependentUpon>MainForm_NTFSLearning.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FAT_PROJECT\fatQuizFrm.resx">
-      <DependentUpon>fatQuizFrm.cs</DependentUpon>
+    <EmbeddedResource Include="FAT_PROJECT\MbrQuizFrm.resx">
+      <DependentUpon>MbrQuizFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NTFS_PROJECT_1\NTFSBootSectorFrm.resx">
       <DependentUpon>NTFSBootSectorFrm.cs</DependentUpon>

@@ -10,40 +10,6 @@ using System.Windows.Forms;
 
 namespace ForensicsCourseToolkit.Quizez
 {
-    public class InvalidStudentPasswordException : Exception
-    {
-        public InvalidStudentPasswordException()
-        {
-        }
-
-        public InvalidStudentPasswordException(string message)
-            : base(message)
-        {
-        }
-
-        public InvalidStudentPasswordException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
-    }
-    public class InvalidInstructorPasswordException : Exception
-    {
-        public InvalidInstructorPasswordException()
-        {
-        }
-
-        public InvalidInstructorPasswordException(string message)
-            : base(message)
-        {
-        }
-
-        public InvalidInstructorPasswordException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
-    }
-
-
     public static class ExamHelper
     {
 

@@ -4,9 +4,4 @@ namespace ForensicsCourseToolkit.Filesystems
     {
         int GetExpectedSize();
     }
-
-    public interface IHaveBootSectorParent
-    {
-       BootSector ParentBootSector { get; set; }
-    }
 }
