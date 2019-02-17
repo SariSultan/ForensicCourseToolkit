@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.portTxtBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.openFirewallRules = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.instructorPassTxtBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.eventLogChkBox = new System.Windows.Forms.CheckBox();
@@ -47,16 +51,18 @@
             this.rcvdCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.submittedCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gradeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.openFirewallRules = new System.Windows.Forms.Button();
-            this.portTxtBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.openCertificateBtn = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.certPasswordTxtBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgview)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.certPasswordTxtBox);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.openCertificateBtn);
             this.panel1.Controls.Add(this.portTxtBox);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.openFirewallRules);
@@ -77,9 +83,55 @@
             this.panel1.Size = new System.Drawing.Size(982, 125);
             this.panel1.TabIndex = 0;
             // 
+            // portTxtBox
+            // 
+            this.portTxtBox.Location = new System.Drawing.Point(439, 66);
+            this.portTxtBox.Name = "portTxtBox";
+            this.portTxtBox.Size = new System.Drawing.Size(114, 22);
+            this.portTxtBox.TabIndex = 98;
+            this.portTxtBox.Text = "10048";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(399, 71);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 17);
+            this.label2.TabIndex = 97;
+            this.label2.Text = "Port";
+            // 
+            // openFirewallRules
+            // 
+            this.openFirewallRules.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.openFirewallRules.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.openFirewallRules.FlatAppearance.BorderSize = 0;
+            this.openFirewallRules.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openFirewallRules.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openFirewallRules.ForeColor = System.Drawing.Color.White;
+            this.openFirewallRules.Location = new System.Drawing.Point(144, 84);
+            this.openFirewallRules.Margin = new System.Windows.Forms.Padding(4);
+            this.openFirewallRules.Name = "openFirewallRules";
+            this.openFirewallRules.Size = new System.Drawing.Size(128, 37);
+            this.openFirewallRules.TabIndex = 96;
+            this.openFirewallRules.Text = "Open Rules";
+            this.openFirewallRules.UseVisualStyleBackColor = false;
+            this.openFirewallRules.Visible = false;
+            this.openFirewallRules.Click += new System.EventHandler(this.openFirewallRules_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(12, 94);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(125, 21);
+            this.checkBox1.TabIndex = 95;
+            this.checkBox1.Text = "Enable Firewall";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // instructorPassTxtBox
             // 
-            this.instructorPassTxtBox.Location = new System.Drawing.Point(799, 14);
+            this.instructorPassTxtBox.Location = new System.Drawing.Point(452, 12);
             this.instructorPassTxtBox.Name = "instructorPassTxtBox";
             this.instructorPassTxtBox.Size = new System.Drawing.Size(171, 22);
             this.instructorPassTxtBox.TabIndex = 94;
@@ -89,7 +141,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(661, 14);
+            this.label1.Location = new System.Drawing.Point(314, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 17);
             this.label1.TabIndex = 93;
@@ -98,7 +150,7 @@
             // eventLogChkBox
             // 
             this.eventLogChkBox.AutoSize = true;
-            this.eventLogChkBox.Location = new System.Drawing.Point(773, 46);
+            this.eventLogChkBox.Location = new System.Drawing.Point(842, 66);
             this.eventLogChkBox.Name = "eventLogChkBox";
             this.eventLogChkBox.Size = new System.Drawing.Size(136, 21);
             this.eventLogChkBox.TabIndex = 92;
@@ -113,10 +165,10 @@
             this.reportBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.reportBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reportBtn.ForeColor = System.Drawing.Color.White;
-            this.reportBtn.Location = new System.Drawing.Point(773, 70);
+            this.reportBtn.Location = new System.Drawing.Point(773, 94);
             this.reportBtn.Margin = new System.Windows.Forms.Padding(4);
             this.reportBtn.Name = "reportBtn";
-            this.reportBtn.Size = new System.Drawing.Size(205, 51);
+            this.reportBtn.Size = new System.Drawing.Size(205, 27);
             this.reportBtn.TabIndex = 91;
             this.reportBtn.Text = "Create Grades Report";
             this.reportBtn.UseVisualStyleBackColor = false;
@@ -130,10 +182,10 @@
             this.stopServerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stopServerBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stopServerBtn.ForeColor = System.Drawing.Color.White;
-            this.stopServerBtn.Location = new System.Drawing.Point(560, 70);
+            this.stopServerBtn.Location = new System.Drawing.Point(560, 94);
             this.stopServerBtn.Margin = new System.Windows.Forms.Padding(4);
             this.stopServerBtn.Name = "stopServerBtn";
-            this.stopServerBtn.Size = new System.Drawing.Size(205, 51);
+            this.stopServerBtn.Size = new System.Drawing.Size(205, 27);
             this.stopServerBtn.TabIndex = 90;
             this.stopServerBtn.Text = "Stop Server";
             this.stopServerBtn.UseVisualStyleBackColor = false;
@@ -158,10 +210,10 @@
             this.startServerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.startServerBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startServerBtn.ForeColor = System.Drawing.Color.White;
-            this.startServerBtn.Location = new System.Drawing.Point(347, 70);
+            this.startServerBtn.Location = new System.Drawing.Point(347, 94);
             this.startServerBtn.Margin = new System.Windows.Forms.Padding(4);
             this.startServerBtn.Name = "startServerBtn";
-            this.startServerBtn.Size = new System.Drawing.Size(205, 51);
+            this.startServerBtn.Size = new System.Drawing.Size(205, 27);
             this.startServerBtn.TabIndex = 88;
             this.startServerBtn.Text = "Start Server";
             this.startServerBtn.UseVisualStyleBackColor = false;
@@ -196,7 +248,7 @@
             this.openExamBtn.Location = new System.Drawing.Point(13, 46);
             this.openExamBtn.Margin = new System.Windows.Forms.Padding(4);
             this.openExamBtn.Name = "openExamBtn";
-            this.openExamBtn.Size = new System.Drawing.Size(227, 37);
+            this.openExamBtn.Size = new System.Drawing.Size(164, 37);
             this.openExamBtn.TabIndex = 71;
             this.openExamBtn.Text = "Open Exam File";
             this.openExamBtn.UseVisualStyleBackColor = false;
@@ -277,51 +329,40 @@
             this.gradeCol.ReadOnly = true;
             this.gradeCol.Width = 77;
             // 
-            // checkBox1
+            // openCertificateBtn
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 94);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(125, 21);
-            this.checkBox1.TabIndex = 95;
-            this.checkBox1.Text = "Enable Firewall";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.openCertificateBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(113)))), ((int)(((byte)(0)))));
+            this.openCertificateBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.openCertificateBtn.FlatAppearance.BorderSize = 0;
+            this.openCertificateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openCertificateBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openCertificateBtn.ForeColor = System.Drawing.Color.White;
+            this.openCertificateBtn.Location = new System.Drawing.Point(663, 1);
+            this.openCertificateBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.openCertificateBtn.Name = "openCertificateBtn";
+            this.openCertificateBtn.Size = new System.Drawing.Size(164, 33);
+            this.openCertificateBtn.TabIndex = 99;
+            this.openCertificateBtn.Text = "Open Certificate";
+            this.openCertificateBtn.UseVisualStyleBackColor = false;
+            this.openCertificateBtn.Click += new System.EventHandler(this.openCertificateBtn_Click);
             // 
-            // openFirewallRules
+            // label3
             // 
-            this.openFirewallRules.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.openFirewallRules.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.openFirewallRules.FlatAppearance.BorderSize = 0;
-            this.openFirewallRules.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openFirewallRules.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openFirewallRules.ForeColor = System.Drawing.Color.White;
-            this.openFirewallRules.Location = new System.Drawing.Point(144, 84);
-            this.openFirewallRules.Margin = new System.Windows.Forms.Padding(4);
-            this.openFirewallRules.Name = "openFirewallRules";
-            this.openFirewallRules.Size = new System.Drawing.Size(128, 37);
-            this.openFirewallRules.TabIndex = 96;
-            this.openFirewallRules.Text = "Open Rules";
-            this.openFirewallRules.UseVisualStyleBackColor = false;
-            this.openFirewallRules.Visible = false;
-            this.openFirewallRules.Click += new System.EventHandler(this.openFirewallRules_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(834, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(136, 17);
+            this.label3.TabIndex = 100;
+            this.label3.Text = "Certificate Password";
             // 
-            // portTxtBox
+            // certPasswordTxtBox
             // 
-            this.portTxtBox.Location = new System.Drawing.Point(425, 44);
-            this.portTxtBox.Name = "portTxtBox";
-            this.portTxtBox.Size = new System.Drawing.Size(114, 22);
-            this.portTxtBox.TabIndex = 98;
-            this.portTxtBox.Text = "10048";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(349, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 17);
-            this.label2.TabIndex = 97;
-            this.label2.Text = "Port";
+            this.certPasswordTxtBox.Location = new System.Drawing.Point(834, 23);
+            this.certPasswordTxtBox.Name = "certPasswordTxtBox";
+            this.certPasswordTxtBox.Size = new System.Drawing.Size(144, 22);
+            this.certPasswordTxtBox.TabIndex = 101;
+            this.certPasswordTxtBox.Text = "123456789";
+            this.certPasswordTxtBox.UseSystemPasswordChar = true;
             // 
             // ExamServer
             // 
@@ -365,5 +406,8 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox portTxtBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox certPasswordTxtBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button openCertificateBtn;
     }
 }

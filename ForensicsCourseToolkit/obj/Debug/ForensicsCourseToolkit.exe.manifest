@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForensicsCourseToolkit.exe" size="903168">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForensicsCourseToolkit.exe" size="905728">
       <assemblyIdentity name="ForensicsCourseToolkit" version="3.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>J3b2zCqekZlGuCuyPMNIVkINJ66xXGylFPii9oaiAkQ=</dsig:DigestValue>
+        <dsig:DigestValue>NlWvnPtFjytmf0xF0I93nPzpnCUHoDYEdVhqgjd+7aQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Scs.dll" size="49664">
-      <assemblyIdentity name="Scs" version="1.1.0.1" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Scs.dll" size="55808">
+      <assemblyIdentity name="Scs" version="1.1.1.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oOS1oXcTBNSAo7KFTwyg7Pnhr0Uv0aFlVHJo4Mht99k=</dsig:DigestValue>
+        <dsig:DigestValue>mSYxt6B67cVYmDrAGTOKx/G0vaA7YZZmiQ2H059Ztfk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

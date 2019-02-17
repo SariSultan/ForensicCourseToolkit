@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.highSecChkBox = new System.Windows.Forms.CheckBox();
             this.showKeySharedISChkBox = new System.Windows.Forms.CheckBox();
             this.showPasswordChkBox = new System.Windows.Forms.CheckBox();
             this.sharedKeyISTxtBox = new System.Windows.Forms.TextBox();
@@ -51,13 +52,14 @@
             this.rtb = new System.Windows.Forms.RichTextBox();
             this.assetsrtb = new System.Windows.Forms.RichTextBox();
             this.flowlayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.highSecChkBox = new System.Windows.Forms.CheckBox();
+            this.openCertificateBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.networkGB.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.openCertificateBtn);
             this.panel1.Controls.Add(this.highSecChkBox);
             this.panel1.Controls.Add(this.showKeySharedISChkBox);
             this.panel1.Controls.Add(this.showPasswordChkBox);
@@ -80,6 +82,17 @@
             this.panel1.Size = new System.Drawing.Size(1016, 125);
             this.panel1.TabIndex = 1;
             // 
+            // highSecChkBox
+            // 
+            this.highSecChkBox.AutoSize = true;
+            this.highSecChkBox.Location = new System.Drawing.Point(445, 96);
+            this.highSecChkBox.Name = "highSecChkBox";
+            this.highSecChkBox.Size = new System.Drawing.Size(114, 21);
+            this.highSecChkBox.TabIndex = 104;
+            this.highSecChkBox.Text = "High Security";
+            this.highSecChkBox.UseVisualStyleBackColor = true;
+            this.highSecChkBox.CheckedChanged += new System.EventHandler(this.highSecChkBox_CheckedChanged);
+            // 
             // showKeySharedISChkBox
             // 
             this.showKeySharedISChkBox.AutoSize = true;
@@ -95,7 +108,7 @@
             // showPasswordChkBox
             // 
             this.showPasswordChkBox.AutoSize = true;
-            this.showPasswordChkBox.Location = new System.Drawing.Point(695, 64);
+            this.showPasswordChkBox.Location = new System.Drawing.Point(658, 65);
             this.showPasswordChkBox.Name = "showPasswordChkBox";
             this.showPasswordChkBox.Size = new System.Drawing.Size(64, 21);
             this.showPasswordChkBox.TabIndex = 89;
@@ -181,7 +194,7 @@
             // 
             // examKeyTxtBox
             // 
-            this.examKeyTxtBox.Location = new System.Drawing.Point(569, 64);
+            this.examKeyTxtBox.Location = new System.Drawing.Point(532, 63);
             this.examKeyTxtBox.Name = "examKeyTxtBox";
             this.examKeyTxtBox.Size = new System.Drawing.Size(120, 22);
             this.examKeyTxtBox.TabIndex = 87;
@@ -201,7 +214,7 @@
             // 
             this.studentIDTxtBox.Location = new System.Drawing.Point(546, 37);
             this.studentIDTxtBox.Name = "studentIDTxtBox";
-            this.studentIDTxtBox.Size = new System.Drawing.Size(144, 22);
+            this.studentIDTxtBox.Size = new System.Drawing.Size(106, 22);
             this.studentIDTxtBox.TabIndex = 97;
             this.studentIDTxtBox.Text = "1234";
             // 
@@ -265,7 +278,7 @@
             // 
             this.studentNameTxtBox.Location = new System.Drawing.Point(546, 9);
             this.studentNameTxtBox.Name = "studentNameTxtBox";
-            this.studentNameTxtBox.Size = new System.Drawing.Size(144, 22);
+            this.studentNameTxtBox.Size = new System.Drawing.Size(106, 22);
             this.studentNameTxtBox.TabIndex = 95;
             this.studentNameTxtBox.Text = "John Doe";
             // 
@@ -277,10 +290,10 @@
             this.openExamBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openExamBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openExamBtn.ForeColor = System.Drawing.Color.White;
-            this.openExamBtn.Location = new System.Drawing.Point(766, 7);
+            this.openExamBtn.Location = new System.Drawing.Point(658, 26);
             this.openExamBtn.Margin = new System.Windows.Forms.Padding(4);
             this.openExamBtn.Name = "openExamBtn";
-            this.openExamBtn.Size = new System.Drawing.Size(144, 75);
+            this.openExamBtn.Size = new System.Drawing.Size(90, 31);
             this.openExamBtn.TabIndex = 71;
             this.openExamBtn.Text = "Get Exam";
             this.openExamBtn.UseVisualStyleBackColor = false;
@@ -314,16 +327,22 @@
             this.flowlayout.Size = new System.Drawing.Size(1016, 245);
             this.flowlayout.TabIndex = 4;
             // 
-            // highSecChkBox
+            // openCertificateBtn
             // 
-            this.highSecChkBox.AutoSize = true;
-            this.highSecChkBox.Location = new System.Drawing.Point(445, 96);
-            this.highSecChkBox.Name = "highSecChkBox";
-            this.highSecChkBox.Size = new System.Drawing.Size(114, 21);
-            this.highSecChkBox.TabIndex = 104;
-            this.highSecChkBox.Text = "High Security";
-            this.highSecChkBox.UseVisualStyleBackColor = true;
-            this.highSecChkBox.CheckedChanged += new System.EventHandler(this.highSecChkBox_CheckedChanged);
+            this.openCertificateBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(113)))), ((int)(((byte)(0)))));
+            this.openCertificateBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.openCertificateBtn.FlatAppearance.BorderSize = 0;
+            this.openCertificateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openCertificateBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openCertificateBtn.ForeColor = System.Drawing.Color.White;
+            this.openCertificateBtn.Location = new System.Drawing.Point(846, 7);
+            this.openCertificateBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.openCertificateBtn.Name = "openCertificateBtn";
+            this.openCertificateBtn.Size = new System.Drawing.Size(164, 70);
+            this.openCertificateBtn.TabIndex = 105;
+            this.openCertificateBtn.Text = "Open Certificate (public key)";
+            this.openCertificateBtn.UseVisualStyleBackColor = false;
+            this.openCertificateBtn.Click += new System.EventHandler(this.openCertificateBtn_Click);
             // 
             // ExaminationWindow
             // 
@@ -370,5 +389,6 @@
         private System.Windows.Forms.TextBox sharedKeyISTxtBox;
         private System.Windows.Forms.Label stdPassLbl;
         private System.Windows.Forms.CheckBox highSecChkBox;
+        private System.Windows.Forms.Button openCertificateBtn;
     }
 }

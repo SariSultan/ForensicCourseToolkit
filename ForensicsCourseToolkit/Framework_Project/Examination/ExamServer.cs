@@ -11,9 +11,12 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Hik.Communication.SslScs.Authentication;
+using Hik.Communication.SslScsServices.Service;
 
 namespace ForensicsCourseToolkit.Framework_Project.Examination
 {
@@ -21,6 +24,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
     {
         Logger aLogger;
         Exam anExam;
+        private X509Certificate ServerCertificate;
         public ExamServer()
         {
             InitializeComponent();
@@ -85,7 +89,19 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
         {
             ExaminationStudentsFilter firewall = new ExaminationStudentsFilter(checkBox1.Checked ? FilterationSecurityLevel.High : FilterationSecurityLevel.Moderate,
                studentPassTxtBox.Text, instructorPassTxtBox.Text,  FirewallRules);
-            server = ScsServiceBuilder.CreateService(new ScsTcpEndPoint(int.Parse(portTxtBox.Text)));
+
+            if (ServerCertificate == null)
+            {
+                server = ScsServiceBuilder.CreateService(new ScsTcpEndPoint("127.0.0.1",int.Parse(portTxtBox.Text)));
+
+            }
+            else
+            {
+                server=SslScsServiceBuilder.CreateSslService(new ScsTcpEndPoint("127.0.0.1",int.Parse(portTxtBox.Text))
+                ,ServerCertificate
+                ,null,
+                SslScsAuthMode.ServerAuth);
+            }
             aService = new NetworkExamService(anExam, studentPassTxtBox.Text, ref aLogger, UpdateDetails, firewall);
             //Add Phone Book Service to service application
             server.AddService<INetworkExamService,
@@ -274,6 +290,28 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void openCertificateBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog opendialog = new OpenFileDialog();
+                opendialog.Filter = "Certificate File (*.pfx)|*.pfx";
+                opendialog.DefaultExt = "pfx";
+                opendialog.AddExtension = true;
+                if (opendialog.ShowDialog() == DialogResult.OK)
+                {
+                    ServerCertificate = new X509Certificate(opendialog.FileName,certPasswordTxtBox.Text);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+              
+            }
+
+            
         }
     }
 }

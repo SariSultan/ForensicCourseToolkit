@@ -8,9 +8,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Hik.Communication.SslScs.Authentication;
+using Hik.Communication.SslScsServices.Client;
+using Hik.Communication.SslScsServices.Service;
 
 namespace ForensicsCourseToolkit.Framework_Project.Examination
 {
@@ -87,9 +91,19 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
                 HighSecurity = highSecChkBox.Checked;
                 //Create a client to connecto to phone book service on local server and
                 //10048 TCP port.
-                client = ScsServiceClientBuilder.CreateClient<INetworkExamService>(
-                    new ScsTcpEndPoint(ipTxtBox.Text, int.Parse(portTxtBox.Text)));
-
+                if(serverPublicKey==null)
+                { client = ScsServiceClientBuilder.CreateClient<INetworkExamService>(
+                    new ScsTcpEndPoint(ipTxtBox.Text, int.Parse(portTxtBox.Text)));}
+                else
+                {
+                    
+                       client = SslScsClientServiceBuilder.CreateSslClient<INetworkExamService>(
+                        new ScsTcpEndPoint(ipTxtBox.Text, int.Parse(portTxtBox.Text))
+                        ,serverPublicKey
+                        ,"127.0.0.1"
+                        ,SslScsAuthMode.ServerAuth
+                        ,null);
+                }
                 // client.Timeout = 3;
                 aLogger.LogMessage($"Trying to connect to the server (timeout {client.Timeout} Seconds)", LogMsgType.Verbose);
                 //Connect to the server
@@ -431,6 +445,28 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
             stdPassLbl.Visible = highSecChkBox.Checked;
             sharedKeyISTxtBox.Visible = highSecChkBox.Checked;
             showKeySharedISChkBox.Visible = highSecChkBox.Checked;
+        }
+
+        private X509Certificate2 serverPublicKey;
+        private void openCertificateBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog opendialog = new OpenFileDialog();
+                opendialog.Filter = "Certificate File (*.cer)|*.cer";
+                opendialog.DefaultExt = "cer";
+                opendialog.AddExtension = true;
+                if (opendialog.ShowDialog() == DialogResult.OK)
+                {
+                    serverPublicKey = new X509Certificate2(opendialog.FileName);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+                throw;
+            }
+
         }
     }
 }
