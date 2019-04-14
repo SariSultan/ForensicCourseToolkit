@@ -50,7 +50,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
                 opendialog.Filter = "FCT Exam File (*.FCTEX)|*.FCTEX";
                 opendialog.DefaultExt = "FCTEX";
                 opendialog.AddExtension = true;
-                requiredDetails = new RequiredDetails(studentNameTxtBox.Text, studentIDTxtBox.Text, studentPassTxtBox.Text,"TODO");
+                requiredDetails = new RequiredDetails(studentNameTxtBox.Text, studentIDTxtBox.Text, studentPassTxtBox.Text,"TODO",DateTime.Now);
                 if (opendialog.ShowDialog() == DialogResult.OK)
                 {
                     var examStringEncrypted = ExamHelper.GetExamFileAsBytes(opendialog.FileName);                   

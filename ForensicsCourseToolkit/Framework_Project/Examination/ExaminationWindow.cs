@@ -98,7 +98,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
                 aLogger.LogMessage("Connected to server", LogMsgType.Verbose);
 
 
-                RequiredDetails requiredDetails = new RequiredDetails(studentNameTxtBox.Text, studentIDTxtBox.Text, examKeyTxtBox.Text,(HighSecurity? sharedKeyISTxtBox.Text:"Low Security Settings Selected"));
+                RequiredDetails requiredDetails = new RequiredDetails(studentNameTxtBox.Text, studentIDTxtBox.Text, examKeyTxtBox.Text,(HighSecurity? sharedKeyISTxtBox.Text:"Low Security Settings Selected"),DateTime.Now);
                 //Add some persons
                 var copy = client.ServiceProxy.GetExamCopyEncryptedZipped(requiredDetails);
                 requiredDetails.DecryptDetails(examKeyTxtBox.Text);

@@ -276,7 +276,8 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
                     var keyUsed = $"Keyyyyyyy{val}";
                     //STEP 1 -- Only get exam copy
                     client.Connect();
-                    var requiredDetails = new RequiredDetails($"StdName{val}", $"Std{val}", "123456", keyUsed, 1);
+                    var random = new Random();
+                    var requiredDetails = new RequiredDetails($"StdName{val}", $"Std{val}", "123456", keyUsed,random.Next(),DateTime.Now);
                     try
                     {
                         var copy = client.ServiceProxy.GetExamCopyEncryptedZipped(requiredDetails, numOfQ, numOfStd);
@@ -310,7 +311,8 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
                         var keyUsed = $"Keyyyyyyy{val}";
                         //STEP 1 -- Only get exam copy
                         client.Connect();
-                        var requiredDetails = new RequiredDetails($"StdName{val}", $"Std{val}", "123456", keyUsed, 1);
+                        var random = new Random();
+                        var requiredDetails = new RequiredDetails($"StdName{val}", $"Std{val}", "123456", keyUsed, random.Next(),DateTime.Now);
                         try
                         {
                             var copy = client.ServiceProxy.GetExamCopyEncryptedZipped(requiredDetails, numOfQ, numOfStd);

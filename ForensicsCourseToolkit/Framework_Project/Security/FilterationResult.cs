@@ -12,6 +12,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
         InvalidStdID_ImpersonationAttack, // protects against impersonation attack value inside encrypted is different that the payload
         InvalidSrcIP,
         InvalidSequenceNumber,
+        InvalidTimeStamp,
         InvalidSubmissionInstructorValidation,
         SubmissionTimeOutinInstructorV,
         DroppedUnknown,

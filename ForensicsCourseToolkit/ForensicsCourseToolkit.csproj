@@ -175,6 +175,7 @@
     <Compile Include="Framework_Project\Security\InstructorValidationData.cs" />
     <Compile Include="Framework_Project\Security\TrackingEntry.cs" />
     <Compile Include="Framework_Project\Serialization\SerializationHelper.cs" />
+    <Compile Include="Framework_Project\TimeStampHelper.cs" />
     <Compile Include="Framework_Project\UpdateStatusDelegate.cs" />
     <Compile Include="NTFS_PROJECT_1\NTFSFrm.cs">
       <SubType>Form</SubType>
