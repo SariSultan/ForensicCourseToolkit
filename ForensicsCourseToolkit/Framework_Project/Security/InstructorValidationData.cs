@@ -22,7 +22,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
         {
             StdID = stdID;
             // Nonce = nonce.ToString();
-            TimeStamp = timeStamp.ToString("yyyyMMdd-HHMMss");
+            TimeStamp = TimeStampHelper.GetTimeStamp(timeStamp);
             IncrementedSN = SNIncremented.ToString();
             OriginalSN = orgSN.ToString();
             //EncryptDetails(instructorPassword); should be handled at upper level before sending encrypt or serialize it all
@@ -46,15 +46,9 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
         //}
         public DateTime GetTimeStamp()
         {
-            string format = "yyyyMMdd-HHMMss";
-            DateTime dateTime;
-            if (DateTime.TryParseExact(TimeStamp, format, CultureInfo.InvariantCulture,
-                DateTimeStyles.None, out dateTime))
-            {
-                return dateTime;
-            }
-            else
-                throw new Exception("Cannot convert time stamp");
+
+           return TimeStampHelper.ConvertTimestampToDatetime(TimeStamp);
+            
         }
 
         //   public Guid GetNonce { get { return Guid.Parse(Nonce); } }

@@ -12,6 +12,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
     [Serializable]
     public class ExaminationStudentsFilter
     {
+        private int TimeStampRequestAllowedSeconds = 3; //Phase 1 allowance 
         // SortedList<string, TrackingEntry> TrackingList; //key is stdID WE REMOVE THIS TO MAKE THE SERVER STATELESS
         SortedList<string, ExaminationFilterRule> Rules { get; set; } ////key is stdID
         FilterationSecurityLevel SecurityLevel { get; set; }
@@ -19,14 +20,14 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
 
         string InstructorPassword { get; set; }
         string ExamKey { get; set; }
-   
+
         public ExaminationStudentsFilter(FilterationSecurityLevel securityLevel, string examKey, string instPassword, SortedList<string, ExaminationFilterRule> rules = null)
         {
             SecurityLevel = securityLevel;
             ExamKey = examKey;
             InstructorPassword = instPassword;
             Rules = rules;
-            
+
         }
 
         public FilterationResult IsValidRequest(RequiredDetails details, string srcIP)
@@ -40,13 +41,13 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
             {
                 return HighFilterationProcessRequest(details, srcIP);
             }
-            return  FilterationResult.DroppedUnknown; //Fail Safe
+            return FilterationResult.DroppedUnknown; //Fail Safe
         }
 
         public FilterationResult IsValidSubmission(RequiredDetails details, string srcIP)
         {
             details.DecryptDetails(ExamKey);
-           
+
 
             if (SecurityLevel == FilterationSecurityLevel.Moderate)
             {
@@ -65,6 +66,11 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
         private bool IsValidExamKey(RequiredDetails details)
         {
             return (details.ExamKey == ExamKey);
+        }
+
+        private bool IsValidTimestamp(RequiredDetails details)
+        {
+            return (TimeStampHelper.IsWithinNSeconds(details.TimeStamp, TimeStampRequestAllowedSeconds));
         }
 
         //private void AddEntryToTrackingList(RequiredDetailsForSendingExam details)
@@ -92,26 +98,34 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
             {
                 Random r = new Random();
 
-                var iV = new InstructorValidationData(details.StudentID, 
-                    DateTime.Now, int.Parse(details.SequenceNumber), int.Parse(details.SequenceNumber)+1);
-            //    TrackingEntry entry = new TrackingEntry(details.StudentID, details.SequenceNumber, iV);
+                var iV = new InstructorValidationData(details.StudentID,
+                    DateTime.Now, int.Parse(details.SequenceNumber), int.Parse(details.SequenceNumber) + 1);
+                //    TrackingEntry entry = new TrackingEntry(details.StudentID, details.SequenceNumber, iV);
                 return iV;
 
             }
             catch (Exception ex)
             {
-              //  aLogger.LogMessage(ex.Message + "[exception in GetIV]", LogMsgType.Error);
+                //  aLogger.LogMessage(ex.Message + "[exception in GetIV]", LogMsgType.Error);
                 throw ex;
             }
         }
         #region MODERATE FILTERATION
 
-        private FilterationResult ModerateFilterationProcessRequest(RequiredDetails details)
+        private FilterationResult ModerateFilterationProcessRequest(RequiredDetails details, bool submit = false)
         {
             if (!IsValidExamKey(details))
             {
 
                 return FilterationResult.InvalidSharedExamKey;
+            }
+
+            if (!submit)
+            {
+                if (!IsValidTimestamp(details))
+                {
+                    return FilterationResult.InvalidTimeStamp;
+                }
             }
 
             //AddEntryToTrackingList(details); // to be checked in submision phase, WE REMOVE THIS TO MAKE TEH SERVER STATELESS
@@ -145,20 +159,20 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
         private FilterationResult ModerateFilterationProcessSubmit(RequiredDetails details)
         {
 
-                var basicFilteration = ModerateFilterationProcessRequest(details);
-                if (basicFilteration != FilterationResult.Accepted)
-                {
-                    return basicFilteration;
-                }
+            var basicFilteration = ModerateFilterationProcessRequest(details, true);
+            if (basicFilteration != FilterationResult.Accepted)
+            {
+                return basicFilteration;
+            }
 
 
 
-                var ivFel = ValidateIV(details);
-                if (ivFel != FilterationResult.Accepted)
-                {
+            var ivFel = ValidateIV(details);
+            if (ivFel != FilterationResult.Accepted)
+            {
 
-                    return ivFel;
-                }
+                return ivFel;
+            }
 
 
 
@@ -177,7 +191,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
         {
 
             details.DecryptSharedKey(rule.SharedKeyIS);
-  
+
             return (details.SharedKeyIS == rule.SharedKeyIS);
         }
         /// <summary>
@@ -209,66 +223,56 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
             return false;
         }
 
-        private void throwFirewallException(FilterationResult result,string extraMsg="")
+        private void throwFirewallException(FilterationResult result, string extraMsg = "")
         {
 
-            if (result == FilterationResult.InvalidSharedExamKey)
+            switch (result)
             {
-                throw new Exception($"Exception[{result}]: Ivalid Exam Key, Please check with your instructor for the correct exam key. [{extraMsg}]");
+                case FilterationResult.InvalidSharedExamKey:
+                    throw new Exception($"Exception[{result}]: Ivalid Exam Key, Please check with your instructor for the correct exam key. [{extraMsg}]");
+                case FilterationResult.StudentIsNotListedInFirewallRules:
+                    throw new Exception($"Exception[{result}]: Student Not Listed in the Firewall Setting, Please check with your instructor to list you in the firewall settings.");
+                case FilterationResult.InvalidSharedStudentKeyIS:
+                    throw new Exception($"Exception[{result}]: Ivalid Shared Key (student password, unique for the student), Please check with your instructor for your password.  [{extraMsg}]");
+                case FilterationResult.InvalidStdID_ImpersonationAttack:
+                    throw new Exception($"Exception[{result}]: Invalid Student ID, are you trying impersonation attack?.  [{extraMsg}]");
+                case FilterationResult.InvalidSrcIP:
+                    throw new Exception($"Exception[{result}]: You IP address is not allowed for your student ID, check with the instructor to change firewall rule for your id.  [{extraMsg}]");
+                case FilterationResult.InvalidSequenceNumber:
+                    throw new Exception($"Exception[{result}]: Invalid sequence number, are you trying to forge a fake submission?.  [{extraMsg}]");
+                case FilterationResult.InvalidSubmissionInstructorValidation:
+                    throw new Exception($"Exception[{result}]: Submission Not Valid.  [{extraMsg}]");
+                case FilterationResult.SubmissionTimeOutinInstructorV:
+                    throw new Exception($"Exception[{result}]: You exceeded the time required for submission, or used an old exam copy.  [{extraMsg}]");
+                case FilterationResult.DroppedUnknown:
+                    throw new Exception($"Exception[{result}]: Dropped for unknown reason!.  [{extraMsg}]");
+                case FilterationResult.InvalidTimeStamp:
+                    throw new Exception($"Exception[{result}]: Invalid timestamp! (possible replay attack).  [{extraMsg}]");
             }
-            if (result == FilterationResult.StudentIsNotListedInFirewallRules)
-            {
-                throw new Exception($"Exception[{result}]: Student Not Listed in the Firewall Setting, Please check with your instructor to list you in the firewall settings.");
-            }
-            if (result == FilterationResult.InvalidSharedStudentKeyIS)
-            {
-                throw new Exception($"Exception[{result}]: Ivalid Shared Key (student password, unique for the student), Please check with your instructor for your password.  [{extraMsg}]");
-            }
-            if (result == FilterationResult.InvalidStdID_ImpersonationAttack)
-            {
-                throw new Exception($"Exception[{result}]: Invalid Student ID, are you trying impersonation attack?.  [{extraMsg}]");
-            }
-            if (result == FilterationResult.InvalidSrcIP)
-            {
-                throw new Exception($"Exception[{result}]: You IP address is not allowed for your student ID, check with the instructor to change firewall rule for your id.  [{extraMsg}]");
-            }
-            if (result == FilterationResult.InvalidSequenceNumber)
-            {
-                throw new Exception($"Exception[{result}]: Invalid sequence number, are you trying to forge a fake submission?.  [{extraMsg}]");
-            }
-            if (result == FilterationResult.InvalidSubmissionInstructorValidation)
-            {
-                throw new Exception($"Exception[{result}]: Submission Not Valid.  [{extraMsg}]");
-            }
-            if (result == FilterationResult.SubmissionTimeOutinInstructorV)
-            {
-                throw new Exception($"Exception[{result}]: You exceeded the time required for submission, or used an old exam copy.  [{extraMsg}]");
-            }
-            if (result == FilterationResult.DroppedUnknown)
-            {
-                throw new Exception($"Exception[{result}]: Dropped for unknown reason!.  [{extraMsg}]");
-            }
-
-
         }
-        private FilterationResult HighFilterationProcessRequest(RequiredDetails details, string srcIP)
+        private FilterationResult HighFilterationProcessRequest(RequiredDetails details, string srcIP, bool submit = false)
         {
 
 
             // Valid Exam Key by decripting the request message details 
             if (!IsValidExamKey(details))
             {
-                
+
                 return FilterationResult.InvalidSharedExamKey;
             }
 
             //Check if the studnet is listed in the firewall list
-
-
-
-            if (!Rules.ContainsKey(details.StudentID) ) //this means student is not listed, the fail safe drop it
+            if (!submit)
             {
-                
+                if (!IsValidTimestamp(details))
+                {
+                    return FilterationResult.InvalidTimeStamp;
+                }
+            }
+
+            if (!Rules.ContainsKey(details.StudentID)) //this means student is not listed, the fail safe drop it
+            {
+
                 return FilterationResult.StudentIsNotListedInFirewallRules;
             }
 
@@ -278,14 +282,14 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
             //check if it is a valid KeyIS
             if (!IsValidSharedKeyIS(details, specificRule))
             {
-               
+
                 return FilterationResult.InvalidSharedStudentKeyIS;
             }
 
 
             if (!IsValidSrcIP(details, specificRule, srcIP))
             {
-               
+
                 return FilterationResult.InvalidSrcIP;
             }
 
@@ -298,7 +302,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
 
         private FilterationResult HighFilterationProcessRequestSubmit(RequiredDetails details, string srcIP)
         {
-            var basicFilteration = HighFilterationProcessRequest(details, srcIP);
+            var basicFilteration = HighFilterationProcessRequest(details, srcIP, true);
             if (basicFilteration != FilterationResult.Accepted)
             {
                 return basicFilteration;
@@ -307,7 +311,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
             var ivFel = ValidateIV(details);
             if (ivFel != FilterationResult.Accepted)
             {
-               
+
                 return ivFel;
             }
 
@@ -331,18 +335,18 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
 
             if (filterResult != FilterationResult.Accepted)
             {
-                throwFirewallException(filterResult,$"IP:{srcIP}");
+                throwFirewallException(filterResult, $"IP:{srcIP}");
                 return new FilterationRequestResult(filterResult, null);
             }
             var v = GetIV(details);
             details.SequenceNumber = (long.Parse(details.SequenceNumber) + 1).ToString();
             details.VEncryptedWithKI = ExamHelper.GetVAsByteArray(v, InstructorPassword);
-            
+
             var examInstance = orgExamCopyEmpty;
             examInstance.RequiredStudentDetails = details; //we received this from the student
 
-    
-           // examInstance.RequiredStudentDetails.SetV_CompressedEncryptedWithKI(v, InstructorPassword);
+
+            // examInstance.RequiredStudentDetails.SetV_CompressedEncryptedWithKI(v, InstructorPassword);
 
             //if(examInstance.RequiredStudentDetails.VEncryptedWithKI== null)
             //{
@@ -353,7 +357,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Security
             //    MessageBox.Show("examInstance.RequiredStudentDetails.VEncryptedWithKI");
             //}
 
-            return new FilterationRequestResult(filterResult, ExamHelper.GetExamFileWithoutSave(examInstance, ExamKey,details.SharedKeyIS,SecurityLevel));
+            return new FilterationRequestResult(filterResult, ExamHelper.GetExamFileWithoutSave(examInstance, ExamKey, details.SharedKeyIS, SecurityLevel));
 
         }
 
