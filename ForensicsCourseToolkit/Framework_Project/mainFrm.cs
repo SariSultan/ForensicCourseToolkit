@@ -41,7 +41,7 @@ namespace ForensicsCourseToolkit
 
             pictureBox1.AppendText($"v{Application.ProductVersion}", new System.Drawing.Font("Courier New", 20), Color.Red);
             pictureBox1.AppendText(Environment.NewLine);
-            pictureBox1.AppendText($"Supervisor: Dr. Ayed Salman", new System.Drawing.Font("Courier New", 20), Color.Black);
+            pictureBox1.AppendText($"Supervisor: Prof. Ayed Salman", new System.Drawing.Font("Courier New", 20), Color.Black);
             pictureBox1.AppendText(Environment.NewLine);
             pictureBox1.AppendText($"Programmed By: Sari Sultan", new System.Drawing.Font("Courier New", 20), Color.Black);
             pictureBox1.AppendText(Environment.NewLine);

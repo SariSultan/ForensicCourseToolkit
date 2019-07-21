@@ -39,6 +39,10 @@ namespace ForensicsCourseToolkit.Filesystems
             return GetAttributeStatus(GetStructureUnitThatHasAttributes(), FileAttribute.LongFileName);
         }
 
+        public bool IsThisEntryADeletedArchive()
+        {
+          return GetAttributeStatus(GetStructureUnitThatHasAttributes(), FileAttribute.Archive) && Structure[0].Value.ToLower()=="e5" ; 
+        }
         public string GetEntryName()
         {
             string name = "";
@@ -53,7 +57,14 @@ namespace ForensicsCourseToolkit.Filesystems
             else
             {
                 name = Conversion.HexToAscii(Structure[0].Value) + Conversion.HexToAscii(Structure[1].Value);
+
+                
             }
+
+            if (IsThisEntryADeletedArchive())
+                {
+                    name+="(DELETED)";
+                }
             return name;
         }
         public bool IsEmpty => Structure[0].Value=="00";
@@ -351,7 +362,12 @@ namespace ForensicsCourseToolkit.Filesystems
                 SizeBytes=4,
             },
         };
-
+        public int GetFileSize()
+        {
+            var bigEndian = Conversion.ConvertLittleEndianToBigEndianandViceVersa(Structure[12].Value);
+            var valueDecimal = Conversion.HexLittleEndianToInt(Structure[12].Value);
+            return valueDecimal;
+        }
         public int GetExpectedSize()
         {
             return Common.FatDirectoryAreaSizeBytes;

@@ -4,7 +4,7 @@
   <description asmv2:iconFile="KU_ICON.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="ForensicsCourseToolkit" version="3.0.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="ForensicsCourseToolkit" version="3.2.0.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="ForensicsCourseToolkit.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForensicsCourseToolkit.exe" size="884736">
-      <assemblyIdentity name="ForensicsCourseToolkit" version="3.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForensicsCourseToolkit.exe" size="888832">
+      <assemblyIdentity name="ForensicsCourseToolkit" version="3.2.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>F+XbcA5PcGmqgIPNYeOJMGlH3DQ7qP62UFm/+IGR1YA=</dsig:DigestValue>
+        <dsig:DigestValue>3aU+LAtfzJeprhojUd8MwLZEfp7PPiXAjAXmIAxmLJk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Scs.dll" size="49664">
-      <assemblyIdentity name="Scs" version="1.1.0.1" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Scs.dll" size="55808">
+      <assemblyIdentity name="Scs" version="1.1.1.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oOS1oXcTBNSAo7KFTwyg7Pnhr0Uv0aFlVHJo4Mht99k=</dsig:DigestValue>
+        <dsig:DigestValue>mSYxt6B67cVYmDrAGTOKx/G0vaA7YZZmiQ2H059Ztfk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

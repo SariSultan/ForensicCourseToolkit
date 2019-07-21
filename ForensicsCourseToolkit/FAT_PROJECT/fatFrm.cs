@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using ForensicsCourseToolkit.Filesystems;
@@ -28,21 +29,29 @@ namespace ForensicsCourseToolkit
             richTextBox1.WordWrap = false;
 
             aLogger = new Logger(ref richTextBox1);
-        
+
             treeView1.NodeMouseDoubleClick += TreeView1_NodeMouseDoubleClick;
         }
 
         private void TreeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            var startAddress =int.Parse( e.Node.Name);
+            var startAddress = int.Parse(e.Node.Name);
 
-         var index=   richTextBox1.Find(startAddress.ToString("X8"));
+            if (e.Node.Text.Contains("DELETED"))
+            {
+                restoreFileBtn.Visible = true;
+            }
+            else
+            {
+                restoreFileBtn.Visible = false;
+            }
+
+            var index = richTextBox1.Find(startAddress.ToString("X8"));
 
             if (index > 0)
             {
                 richTextBox1.SelectionStart = index;
                 richTextBox1.ScrollToCaret();
-                
             }
         }
 
@@ -131,8 +140,8 @@ namespace ForensicsCourseToolkit
             {
                 //var aVbr = new Vbr(v.Value, $"VBR[{(v.Order - 1).ToString("X2")}]", ref aLogger);
                 var aVbr = Common.GetUnit<Vbr>(v.Value, ref aLogger, -1, $"VBR[{(v.Order - 1).ToString("X2")}]", null);
-                if(!aVbr.IsEmptyPartition())
-                { vbrsList.Add(aVbr);}
+                if (!aVbr.IsEmptyPartition())
+                { vbrsList.Add(aVbr); }
             }
         }
 
@@ -161,7 +170,7 @@ namespace ForensicsCourseToolkit
                 richTextBox1.AppendText("\n");
                 Printer.PrintHorizentalLine(ref richTextBox1, 80, '-', true);
                 if (!v.IsEmptyPartition())
-                    Printer.PrintStructureValues(v.Structure, ref richTextBox1,ref aLogger);
+                    Printer.PrintStructureValues(v.Structure, ref richTextBox1, ref aLogger);
             }
         }
 
@@ -197,7 +206,7 @@ namespace ForensicsCourseToolkit
                 aLogger.LogMessage("vbr list is empty, end function!", LogMsgType.Warning);
                 return;
             }
-            Helpers.Printer.PrintVbrListWithBootSectors(fileName, ref vbrsList, ref aLogger, ref richTextBox1,true);
+            Helpers.Printer.PrintVbrListWithBootSectors(fileName, ref vbrsList, ref aLogger, ref richTextBox1, true);
             //Helpers.Printer.PrintVbrListWithBootSectors();
             //foreach (var vbr in vbrsList)
             //{
@@ -215,7 +224,7 @@ namespace ForensicsCourseToolkit
             //        richTextBox1.AppendText("\n");
             //        Printer.PrintHorizentalLine(ref richTextBox1, 80, '-', true);
 
-                  
+
 
             //        richTextBox1.AppendText("\n");
             //    }
@@ -240,7 +249,7 @@ namespace ForensicsCourseToolkit
                 return;
             }
 
-            Helpers.Printer.PrintVbrListWithBootSectors(fileName, ref vbrsList, ref aLogger, ref richTextBox1,false);
+            Helpers.Printer.PrintVbrListWithBootSectors(fileName, ref vbrsList, ref aLogger, ref richTextBox1, false);
         }
 
 
@@ -250,7 +259,7 @@ namespace ForensicsCourseToolkit
             Printer.PrintEmptyStructure<FatDirectoryArea>(ref aLogger, ref richTextBox1);
         }
 
-        List<FatDirectoryArea> RootDirectoryEntries=new List<FatDirectoryArea>();
+        List<FatDirectoryArea> RootDirectoryEntries = new List<FatDirectoryArea>();
 
         public void ParseRootDirectoryEntries()
         {
@@ -258,12 +267,12 @@ namespace ForensicsCourseToolkit
             {
                 int dataAreaStartLoc = bs.GetRootDirectoryStartByte();//this should be equal to the start address inside the directory
 
-                List<FatDirectoryArea> longNames=new List<FatDirectoryArea>();
+                List<FatDirectoryArea> longNames = new List<FatDirectoryArea>();
                 while (true)
                 {
                     var directory = Common.GetUnit<FatDirectoryArea>(fileName, ref aLogger, dataAreaStartLoc,
                        "DirectoryArea-" + bs.Description, bs);
-                   
+
                     dataAreaStartLoc += Common.FatDirectoryAreaSizeBytes;
                     if (directory.IsEmpty) break;
 
@@ -276,7 +285,7 @@ namespace ForensicsCourseToolkit
                         if (longNames.Count > 0)
                         {
                             directory.LongFileNames = longNames;
-                            longNames=new List<FatDirectoryArea>();
+                            longNames = new List<FatDirectoryArea>();
                         }
                         RootDirectoryEntries.Add(directory);
 
@@ -285,14 +294,14 @@ namespace ForensicsCourseToolkit
                     if (directory.IsThisEntryaDirectory())
                     {
                         var childrenStartLoc = directory.GetDataLocation();
-                        ParseChildren(ref directory,  bs);
+                        ParseChildren(ref directory, bs);
                     }
 
                 }
             }
         }
 
-       void ParseChildren(ref FatDirectoryArea parent,  BootSector bs)
+        void ParseChildren(ref FatDirectoryArea parent, BootSector bs)
         {
             if (!parent.IsThisEntryaDirectory()) return;
             int dataAreaStartLoc = parent.GetDataLocation();
@@ -324,7 +333,7 @@ namespace ForensicsCourseToolkit
                 //    ParseChildren(ref directory,  bs);
                 //}
             }
-        } 
+        }
         private void FatTableBtn_Click(object sender, EventArgs e)
         {
             ParseBootSector();
@@ -343,7 +352,15 @@ namespace ForensicsCourseToolkit
                 }
                 else if (directory.IsThisEntryanArchive())
                 {
-                    richTextBox1.AppendText("\n[NORMAL FILE]\n");
+
+                    if (directory.IsThisEntryADeletedArchive())
+                    {
+                        richTextBox1.AppendText("\n[DELETED FILE]\n");
+                    }
+                    else
+                    {
+                        richTextBox1.AppendText("\n[NORMAL FILE]\n");
+                    }
                 }
 
                 //printing hex table
@@ -376,7 +393,7 @@ namespace ForensicsCourseToolkit
                         richTextBox1.AppendText($"|---- [DONE] Printing Long Name Entry [{counter}] \n");
                         counter++;
                     }
-                    richTextBox1.AppendText($"\n [END]******************** Printing long file name entries  ************ \n",Color.Red);
+                    richTextBox1.AppendText($"\n [END]******************** Printing long file name entries  ************ \n", Color.Red);
                 }
 
 
@@ -442,20 +459,25 @@ namespace ForensicsCourseToolkit
             }
             else
             {
-                foreach (var rootDirectoryEntry in RootDirectoryEntries)
+                foreach (var rootDirectoryEntry in RootDirectoryEntries.Where(x=>x.GetFileSize()>0 && !x.IsThisEntryaDirectory()))
                 {
                     AddEntryAndItsChildren(rootDirectoryEntry);
                 }
             }
-            
+
         }
 
         private void AddEntryAndItsChildren(FatDirectoryArea rootDirectoryEntry)
         {
-          var tvn=  treeView1.Nodes.Add(rootDirectoryEntry.StartAddress.ToString(), rootDirectoryEntry.GetEntryName());
+            var tvn = treeView1.Nodes.Add(rootDirectoryEntry.StartAddress.ToString(), rootDirectoryEntry.GetEntryName());
+
+           
+
             foreach (var child in rootDirectoryEntry.ChildrenList)
             {
-             var newNode=   tvn.Nodes.Add(child.StartAddress.ToString(), child.GetEntryName());
+               
+                    var newNode = tvn.Nodes.Add(child.StartAddress.ToString(), child.GetEntryName());
+                
             }
         }
 
@@ -471,16 +493,16 @@ namespace ForensicsCourseToolkit
                 richTextBox1.AppendText($"Printing FAT TABLEs for Boot Secort [{counter++}]\n\n");
                 for (int i = 0; i < bootSector.GetNumberOfFats(); i++)
                 {
-                    FatTable aFatTable=new FatTable(fileName,bootSector,$"Fat Table {i}",i);
+                    FatTable aFatTable = new FatTable(fileName, bootSector, $"Fat Table {i}", i);
 
                     richTextBox1.AppendText($"Printing FAT TABLE{i}\n\n");
                     HexPrinter aHexPrinter = new HexPrinter(ref richTextBox1, 32, aFatTable.StartAddress, ref aLogger);
                     richTextBox1.AppendText($"\tFirst 32 bytes of FAT table {i} \n");
-                    aHexPrinter.PrintValue(aFatTable.RawValue.Substring(0,64), Color.White);
+                    aHexPrinter.PrintValue(aFatTable.RawValue.Substring(0, 64), Color.White);
 
-                    aHexPrinter = new HexPrinter(ref richTextBox1, 32, aFatTable.StartAddress + (aFatTable.RawValue.Length/2) - 32, ref aLogger);
+                    aHexPrinter = new HexPrinter(ref richTextBox1, 32, aFatTable.StartAddress + (aFatTable.RawValue.Length / 2) - 32, ref aLogger);
                     richTextBox1.AppendText($"\n\tLast 32 bytes of FAT table {i} \n");
-                    aHexPrinter.PrintValue(aFatTable.RawValue.Substring(aFatTable.RawValue.Length-64, 64), Color.White);
+                    aHexPrinter.PrintValue(aFatTable.RawValue.Substring(aFatTable.RawValue.Length - 64, 64), Color.White);
 
                     richTextBox1.SuspendLayout();
                     for (int index = 0; index < aFatTable.ParsedEntries.Count; index++)
@@ -501,7 +523,7 @@ namespace ForensicsCourseToolkit
                                                  parsedEntry[2].ToString();
 
                             var firstdatalocByte = aFatTable.ParentBootSector.FirstDataSectorByte() +
-                                                    (index * 2 ) *
+                                                    (index * 2) *
                                                     aFatTable.ParentBootSector.GetNumberOfSectorsPerCluser() *
                                                     aFatTable.ParentBootSector.BytesPerSector();
                             richTextBox1.AppendText(
@@ -530,7 +552,7 @@ namespace ForensicsCourseToolkit
 
         public enum Fat12EntryType : short
         {
-            Empty=0, //000
+            Empty = 0, //000
             ClusterInUseNextNum,//002-FEF: cluster in use; the value given is the number of the next cluster in the file,
             Reserved,// FF0-FF6: reserved,
             BadCluster,//FF7: bad cluster
@@ -540,18 +562,51 @@ namespace ForensicsCourseToolkit
         public Fat12EntryType CehckFat12EntryValue(string entry3hexchars)
         {
             int val = int.Parse("0" + entry3hexchars, NumberStyles.HexNumber);
-            if(val==0)
+            if (val == 0)
                 return Fat12EntryType.Empty;
-            else if(val>=002 && val <= 0xFEF)
+            else if (val >= 002 && val <= 0xFEF)
                 return Fat12EntryType.ClusterInUseNextNum;
-            else if(val>=0xFF0 && val <=0xFF6)
+            else if (val >= 0xFF0 && val <= 0xFF6)
                 return Fat12EntryType.Reserved;
-            else if(val == 0xff7)
+            else if (val == 0xff7)
                 return Fat12EntryType.BadCluster;
-            else if(val>=0xff8 && val<=0xfff)
+            else if (val >= 0xff8 && val <= 0xfff)
                 return Fat12EntryType.ClusterInUseLast;
             else
                 return Fat12EntryType.NotParsedCorrectly;
         }
+
+        private void DeletedFilesBtn_Click(object sender, EventArgs e)
+        {
+            if (!treeView1.SelectedNode.Text.Contains("DELETED"))
+            {
+                MessageBox.Show("Please try to resotre a deleted file instead.");
+            }
+
+            var startAddressInNode = int.Parse(treeView1.SelectedNode.Name);
+
+            var entry = RootDirectoryEntries.Where(x => x.StartAddress == startAddressInNode).FirstOrDefault();
+
+            var dataLocation = entry.GetDataLocation();
+            var size = entry.GetFileSize();
+
+            byte[] test = new byte[size];
+            using (BinaryReader reader = new BinaryReader(new FileStream(fileName, FileMode.Open)))
+            {
+                reader.BaseStream.Seek(dataLocation, SeekOrigin.Begin);
+                reader.Read(test, 0, size);
+            }
+
+            var saveFileDial = new SaveFileDialog();
+            saveFileDial.FileName = entry.GetEntryName();
+            if (saveFileDial.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllBytes(saveFileDial.FileName, test);
+            }
+
+
+        }
+
+
     }
 }

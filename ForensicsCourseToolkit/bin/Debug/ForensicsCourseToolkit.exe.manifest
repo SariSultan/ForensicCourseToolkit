@@ -4,7 +4,7 @@
   <description asmv2:iconFile="KU_ICON.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="ForensicsCourseToolkit" version="3.0.0.0" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="ForensicsCourseToolkit" version="3.2.0.0" language="neutral" processorArchitecture="x86" />
     <commandLine file="ForensicsCourseToolkit.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForensicsCourseToolkit.exe" size="905728">
-      <assemblyIdentity name="ForensicsCourseToolkit" version="3.0.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForensicsCourseToolkit.exe" size="907776">
+      <assemblyIdentity name="ForensicsCourseToolkit" version="3.2.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NlWvnPtFjytmf0xF0I93nPzpnCUHoDYEdVhqgjd+7aQ=</dsig:DigestValue>
+        <dsig:DigestValue>HNDfvMSgaAXHYFWQsRykIYf+eqGUyUS9c2AejjXxsRs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

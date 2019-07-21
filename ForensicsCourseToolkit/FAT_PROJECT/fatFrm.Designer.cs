@@ -43,6 +43,7 @@
             this.openImageBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.restoreFileBtn = new System.Windows.Forms.Button();
             this.topPnl.SuspendLayout();
             this.FatGB.SuspendLayout();
             this.bootSectorGB.SuspendLayout();
@@ -56,10 +57,9 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 129);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.richTextBox1.Location = new System.Drawing.Point(0, 105);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1299, 624);
+            this.richTextBox1.Size = new System.Drawing.Size(974, 507);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             this.richTextBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseUp);
@@ -72,22 +72,20 @@
             this.topPnl.Controls.Add(this.openImageBtn);
             this.topPnl.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPnl.Location = new System.Drawing.Point(0, 0);
-            this.topPnl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.topPnl.Name = "topPnl";
-            this.topPnl.Size = new System.Drawing.Size(1656, 129);
+            this.topPnl.Size = new System.Drawing.Size(1242, 105);
             this.topPnl.TabIndex = 2;
             // 
             // FatGB
             // 
+            this.FatGB.Controls.Add(this.restoreFileBtn);
             this.FatGB.Controls.Add(this.fatTablesBtn);
             this.FatGB.Controls.Add(this.FatTableBtn);
             this.FatGB.Controls.Add(this.FatDirectoryStructureBtn);
             this.FatGB.Controls.Add(this.FatValuesBtn);
-            this.FatGB.Location = new System.Drawing.Point(735, 15);
-            this.FatGB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FatGB.Location = new System.Drawing.Point(551, 12);
             this.FatGB.Name = "FatGB";
-            this.FatGB.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.FatGB.Size = new System.Drawing.Size(476, 103);
+            this.FatGB.Size = new System.Drawing.Size(648, 84);
             this.FatGB.TabIndex = 80;
             this.FatGB.TabStop = false;
             this.FatGB.Text = "FAT";
@@ -100,10 +98,9 @@
             this.fatTablesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fatTablesBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fatTablesBtn.ForeColor = System.Drawing.Color.White;
-            this.fatTablesBtn.Location = new System.Drawing.Point(8, 57);
-            this.fatTablesBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.fatTablesBtn.Location = new System.Drawing.Point(6, 46);
             this.fatTablesBtn.Name = "fatTablesBtn";
-            this.fatTablesBtn.Size = new System.Drawing.Size(227, 37);
+            this.fatTablesBtn.Size = new System.Drawing.Size(170, 30);
             this.fatTablesBtn.TabIndex = 77;
             this.fatTablesBtn.Text = "Fat Tables";
             this.fatTablesBtn.UseVisualStyleBackColor = false;
@@ -117,10 +114,9 @@
             this.FatTableBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.FatTableBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FatTableBtn.ForeColor = System.Drawing.Color.White;
-            this.FatTableBtn.Location = new System.Drawing.Point(241, 15);
-            this.FatTableBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FatTableBtn.Location = new System.Drawing.Point(181, 12);
             this.FatTableBtn.Name = "FatTableBtn";
-            this.FatTableBtn.Size = new System.Drawing.Size(227, 37);
+            this.FatTableBtn.Size = new System.Drawing.Size(170, 30);
             this.FatTableBtn.TabIndex = 76;
             this.FatTableBtn.Text = "Entries";
             this.FatTableBtn.UseVisualStyleBackColor = false;
@@ -134,10 +130,9 @@
             this.FatDirectoryStructureBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.FatDirectoryStructureBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FatDirectoryStructureBtn.ForeColor = System.Drawing.Color.White;
-            this.FatDirectoryStructureBtn.Location = new System.Drawing.Point(8, 15);
-            this.FatDirectoryStructureBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FatDirectoryStructureBtn.Location = new System.Drawing.Point(6, 12);
             this.FatDirectoryStructureBtn.Name = "FatDirectoryStructureBtn";
-            this.FatDirectoryStructureBtn.Size = new System.Drawing.Size(227, 37);
+            this.FatDirectoryStructureBtn.Size = new System.Drawing.Size(170, 30);
             this.FatDirectoryStructureBtn.TabIndex = 75;
             this.FatDirectoryStructureBtn.Text = "Structure";
             this.FatDirectoryStructureBtn.UseVisualStyleBackColor = false;
@@ -151,10 +146,9 @@
             this.FatValuesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.FatValuesBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FatValuesBtn.ForeColor = System.Drawing.Color.White;
-            this.FatValuesBtn.Location = new System.Drawing.Point(241, 57);
-            this.FatValuesBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FatValuesBtn.Location = new System.Drawing.Point(181, 46);
             this.FatValuesBtn.Name = "FatValuesBtn";
-            this.FatValuesBtn.Size = new System.Drawing.Size(227, 37);
+            this.FatValuesBtn.Size = new System.Drawing.Size(170, 30);
             this.FatValuesBtn.TabIndex = 74;
             this.FatValuesBtn.Text = "Tree View";
             this.FatValuesBtn.UseVisualStyleBackColor = false;
@@ -165,11 +159,9 @@
             this.bootSectorGB.Controls.Add(this.PrintBootSectorsBtn);
             this.bootSectorGB.Controls.Add(this.showBootSectorStructureBtn);
             this.bootSectorGB.Controls.Add(this.PrintBootSectorVals);
-            this.bootSectorGB.Location = new System.Drawing.Point(251, 15);
-            this.bootSectorGB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bootSectorGB.Location = new System.Drawing.Point(188, 12);
             this.bootSectorGB.Name = "bootSectorGB";
-            this.bootSectorGB.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bootSectorGB.Size = new System.Drawing.Size(476, 103);
+            this.bootSectorGB.Size = new System.Drawing.Size(357, 84);
             this.bootSectorGB.TabIndex = 79;
             this.bootSectorGB.TabStop = false;
             this.bootSectorGB.Text = "Boot Sector";
@@ -182,10 +174,9 @@
             this.PrintBootSectorsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PrintBootSectorsBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrintBootSectorsBtn.ForeColor = System.Drawing.Color.White;
-            this.PrintBootSectorsBtn.Location = new System.Drawing.Point(241, 15);
-            this.PrintBootSectorsBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PrintBootSectorsBtn.Location = new System.Drawing.Point(181, 12);
             this.PrintBootSectorsBtn.Name = "PrintBootSectorsBtn";
-            this.PrintBootSectorsBtn.Size = new System.Drawing.Size(227, 37);
+            this.PrintBootSectorsBtn.Size = new System.Drawing.Size(170, 30);
             this.PrintBootSectorsBtn.TabIndex = 76;
             this.PrintBootSectorsBtn.Text = "BootSector Table(s)";
             this.PrintBootSectorsBtn.UseVisualStyleBackColor = false;
@@ -199,10 +190,9 @@
             this.showBootSectorStructureBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showBootSectorStructureBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showBootSectorStructureBtn.ForeColor = System.Drawing.Color.White;
-            this.showBootSectorStructureBtn.Location = new System.Drawing.Point(8, 15);
-            this.showBootSectorStructureBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.showBootSectorStructureBtn.Location = new System.Drawing.Point(6, 12);
             this.showBootSectorStructureBtn.Name = "showBootSectorStructureBtn";
-            this.showBootSectorStructureBtn.Size = new System.Drawing.Size(227, 37);
+            this.showBootSectorStructureBtn.Size = new System.Drawing.Size(170, 30);
             this.showBootSectorStructureBtn.TabIndex = 75;
             this.showBootSectorStructureBtn.Text = "BootSector Structure";
             this.showBootSectorStructureBtn.UseVisualStyleBackColor = false;
@@ -216,10 +206,9 @@
             this.PrintBootSectorVals.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PrintBootSectorVals.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrintBootSectorVals.ForeColor = System.Drawing.Color.White;
-            this.PrintBootSectorVals.Location = new System.Drawing.Point(241, 57);
-            this.PrintBootSectorVals.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PrintBootSectorVals.Location = new System.Drawing.Point(181, 46);
             this.PrintBootSectorVals.Name = "PrintBootSectorVals";
-            this.PrintBootSectorVals.Size = new System.Drawing.Size(227, 37);
+            this.PrintBootSectorVals.Size = new System.Drawing.Size(170, 30);
             this.PrintBootSectorVals.TabIndex = 74;
             this.PrintBootSectorVals.Text = "Print BootSector vals";
             this.PrintBootSectorVals.UseVisualStyleBackColor = false;
@@ -233,10 +222,9 @@
             this.clearBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearBtn.ForeColor = System.Drawing.Color.White;
-            this.clearBtn.Location = new System.Drawing.Point(16, 71);
-            this.clearBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clearBtn.Location = new System.Drawing.Point(12, 58);
             this.clearBtn.Name = "clearBtn";
-            this.clearBtn.Size = new System.Drawing.Size(227, 37);
+            this.clearBtn.Size = new System.Drawing.Size(170, 30);
             this.clearBtn.TabIndex = 78;
             this.clearBtn.Text = "Clear Screen";
             this.clearBtn.UseVisualStyleBackColor = false;
@@ -250,10 +238,9 @@
             this.openImageBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openImageBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openImageBtn.ForeColor = System.Drawing.Color.White;
-            this.openImageBtn.Location = new System.Drawing.Point(16, 18);
-            this.openImageBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openImageBtn.Location = new System.Drawing.Point(12, 15);
             this.openImageBtn.Name = "openImageBtn";
-            this.openImageBtn.Size = new System.Drawing.Size(227, 37);
+            this.openImageBtn.Size = new System.Drawing.Size(170, 30);
             this.openImageBtn.TabIndex = 70;
             this.openImageBtn.Text = "Open Image (RAW)";
             this.openImageBtn.UseVisualStyleBackColor = false;
@@ -263,30 +250,44 @@
             // 
             this.panel1.Controls.Add(this.treeView1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(1299, 129);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(974, 105);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(357, 624);
+            this.panel1.Size = new System.Drawing.Size(268, 507);
             this.panel1.TabIndex = 3;
             // 
             // treeView1
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(357, 624);
+            this.treeView1.Size = new System.Drawing.Size(268, 507);
             this.treeView1.TabIndex = 0;
+            // 
+            // restoreFileBtn
+            // 
+            this.restoreFileBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(106)))), ((int)(((byte)(140)))));
+            this.restoreFileBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.restoreFileBtn.FlatAppearance.BorderSize = 0;
+            this.restoreFileBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.restoreFileBtn.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.restoreFileBtn.ForeColor = System.Drawing.Color.White;
+            this.restoreFileBtn.Location = new System.Drawing.Point(367, 12);
+            this.restoreFileBtn.Name = "restoreFileBtn";
+            this.restoreFileBtn.Size = new System.Drawing.Size(170, 30);
+            this.restoreFileBtn.TabIndex = 78;
+            this.restoreFileBtn.Text = "Restore Deleted File";
+            this.restoreFileBtn.UseVisualStyleBackColor = false;
+            this.restoreFileBtn.Visible = false;
+            this.restoreFileBtn.Click += new System.EventHandler(this.DeletedFilesBtn_Click);
             // 
             // fatFrm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1656, 753);
+            this.ClientSize = new System.Drawing.Size(1242, 612);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.topPnl);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "fatFrm";
             this.Text = "Boot Sector";
             this.topPnl.ResumeLayout(false);
@@ -313,6 +314,7 @@
         private System.Windows.Forms.Button fatTablesBtn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Button restoreFileBtn;
     }
 }
 

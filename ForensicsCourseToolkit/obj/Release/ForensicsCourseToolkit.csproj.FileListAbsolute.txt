@@ -226,3 +226,5 @@ C:\Users\node\Desktop\ForensicCourseToolkit\ForensicsCourseToolkit\obj\Release\F
 C:\Users\node\Desktop\ForensicCourseToolkit\ForensicsCourseToolkit\obj\Release\ForensicsCourseToolkit.csproj.CopyComplete
 C:\Users\node\Desktop\ForensicCourseToolkit\ForensicsCourseToolkit\obj\Release\ForensicsCourseToolkit.exe
 C:\Users\node\Desktop\ForensicCourseToolkit\ForensicsCourseToolkit\obj\Release\ForensicsCourseToolkit.pdb
+C:\Users\node\Desktop\ForensicCourseToolkit\ForensicsCourseToolkit\bin\Release\Scs.xml
+C:\Users\node\Desktop\ForensicCourseToolkit\ForensicsCourseToolkit\obj\Release\ForensicsCourseToolkit.csprojAssemblyReference.cache
