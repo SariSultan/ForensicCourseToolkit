@@ -24,7 +24,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
     {
         Logger aLogger;
         Exam anExam;
-        private X509Certificate ServerCertificate;
+        private X509Certificate2 ServerCertificate;
         public ExamServer()
         {
             InitializeComponent();
@@ -302,7 +302,7 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
                 opendialog.AddExtension = true;
                 if (opendialog.ShowDialog() == DialogResult.OK)
                 {
-                    ServerCertificate = new X509Certificate(opendialog.FileName,certPasswordTxtBox.Text);
+                    ServerCertificate = new X509Certificate2(opendialog.FileName,certPasswordTxtBox.Text);
                 }
             }
             catch (Exception exception)

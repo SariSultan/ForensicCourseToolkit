@@ -104,7 +104,8 @@ namespace ForensicsCourseToolkit.Framework_Project.Examination
                         ,SslScsAuthMode.ServerAuth
                         ,null);
                 }
-                // client.Timeout = 3;
+                // client.Timeout = 5;
+                // client.ConnectTimeout = 2;
                 aLogger.LogMessage($"Trying to connect to the server (timeout {client.Timeout} Seconds)", LogMsgType.Verbose);
                 //Connect to the server
                 client.Connect();

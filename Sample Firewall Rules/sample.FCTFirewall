@@ -1,0 +1,5 @@
+# FCT V3.0.0.0 FIREWALL CONFIGURATION FILE
+# TYPE= COMMA SEPARATED CSV
+#StdId, StdName, Password, Filter IP <YES/NO>, IPs
+1234 , John Doe, 123456, NO, 10.0.0.1;10.0.0.5
+45889 , Jane D., TestP@as$, NO, 10.0.0.1/24
