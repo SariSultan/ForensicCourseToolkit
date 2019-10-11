@@ -459,7 +459,7 @@ namespace ForensicsCourseToolkit
             }
             else
             {
-                foreach (var rootDirectoryEntry in RootDirectoryEntries.Where(x=>x.GetFileSize()>0 && !x.IsThisEntryaDirectory()))
+                foreach (var rootDirectoryEntry in RootDirectoryEntries.Where(x => x.GetFileSize() > 0 && !x.IsThisEntryaDirectory()))
                 {
                     AddEntryAndItsChildren(rootDirectoryEntry);
                 }
@@ -471,13 +471,13 @@ namespace ForensicsCourseToolkit
         {
             var tvn = treeView1.Nodes.Add(rootDirectoryEntry.StartAddress.ToString(), rootDirectoryEntry.GetEntryName());
 
-           
+
 
             foreach (var child in rootDirectoryEntry.ChildrenList)
             {
-               
-                    var newNode = tvn.Nodes.Add(child.StartAddress.ToString(), child.GetEntryName());
-                
+
+                var newNode = tvn.Nodes.Add(child.StartAddress.ToString(), child.GetEntryName());
+
             }
         }
 
@@ -487,66 +487,102 @@ namespace ForensicsCourseToolkit
             {
                 ParseBootSector();
             }
+
+
+
             int counter = 1;
             foreach (var bootSector in bootSectors)
             {
                 richTextBox1.AppendText($"Printing FAT TABLEs for Boot Secort [{counter++}]\n\n");
                 for (int i = 0; i < bootSector.GetNumberOfFats(); i++)
                 {
-                    FatTable aFatTable = new FatTable(fileName, bootSector, $"Fat Table {i}", i);
-
-                    richTextBox1.AppendText($"Printing FAT TABLE{i}\n\n");
-                    HexPrinter aHexPrinter = new HexPrinter(ref richTextBox1, 32, aFatTable.StartAddress, ref aLogger);
-                    richTextBox1.AppendText($"\tFirst 32 bytes of FAT table {i} \n");
-                    aHexPrinter.PrintValue(aFatTable.RawValue.Substring(0, 64), Color.White);
-
-                    aHexPrinter = new HexPrinter(ref richTextBox1, 32, aFatTable.StartAddress + (aFatTable.RawValue.Length / 2) - 32, ref aLogger);
-                    richTextBox1.AppendText($"\n\tLast 32 bytes of FAT table {i} \n");
-                    aHexPrinter.PrintValue(aFatTable.RawValue.Substring(aFatTable.RawValue.Length - 64, 64), Color.White);
-
-                    richTextBox1.SuspendLayout();
-                    for (int index = 0; index < aFatTable.ParsedEntries.Count; index++)
+                    /*
+                    //BUG: ERROR FOR LARGE FAT32 IMAGES. @THANKS TO THE ANONYMOUS REVIEWER. 
+                    //FIX: CHECK FOR THE FAT SIZE BEFORE, IF IT WAS BIGGER THAN A SPECIFIC
+                    //THRESOLD, ASK TO EXPORT IT TO FILE. 
+                    var maxAllowedFatSizeInBytes = 1024;
+                    var startAddress = bootSector.GetFatTableStartByte(i);
+                    if (bootSector.FatSizeInBytes() > maxAllowedFatSizeInBytes && false)
                     {
-                        var parsedEntry = aFatTable.ParsedEntries[index];
-                        if (parsedEntry != "000000")
+                        if (DialogResult.Yes == MessageBox.Show(
+                                $"The FAT size #{i} is too big to be displayed, would you like to export to file?",
+                                "Too big to display."
+                                , MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                        )
                         {
-                            //richTextBox1.AppendText("\n"+parsedEntry);
-                            //0 1 2 3 4 5 
-                            //u v w x y z
-                            // xuv & yzw
-                            string fisrtEntry = parsedEntry[3].ToString() + parsedEntry[0].ToString() +
-                                                parsedEntry[1].ToString();
-
-                            var firstEntryType = CehckFat12EntryValue(fisrtEntry);
-
-                            string secondEntry = parsedEntry[4].ToString() + parsedEntry[5].ToString() +
-                                                 parsedEntry[2].ToString();
-
-                            var firstdatalocByte = aFatTable.ParentBootSector.FirstDataSectorByte() +
-                                                    (index * 2) *
-                                                    aFatTable.ParentBootSector.GetNumberOfSectorsPerCluser() *
-                                                    aFatTable.ParentBootSector.BytesPerSector();
-                            richTextBox1.AppendText(
-                                $"\n [{index}] {fisrtEntry}:\t {firstEntryType}  \t Data Loca={firstdatalocByte.ToString("X8")}");
-
-                            var seconddatalocByte = aFatTable.ParentBootSector.FirstDataSectorByte() +
-                                                    (index * 2 + 1) *
-                                                    aFatTable.ParentBootSector.GetNumberOfSectorsPerCluser() *
-                                                    aFatTable.ParentBootSector.BytesPerSector();
-                            var secondEntryType = CehckFat12EntryValue(secondEntry);
-                            richTextBox1.AppendText(
-                                $"\n [{index + 1}] {secondEntry}:\t {secondEntryType}  \t Data Loca={seconddatalocByte.ToString("X8")}");
-                        }
-                        else
-                        {
-                            richTextBox1.AppendText(
-                                $"\n reached last file (stopped to save space), two vals ={parsedEntry} ");
-                            break;
+                            SaveFileDialog adialog = new SaveFileDialog();
+                            adialog.Filter = "Text File (*.txt)|*.txt";
+                            adialog.DefaultExt = "txt";
+                            adialog.AddExtension = true;
+                            if (adialog.ShowDialog() == DialogResult.OK)
+                            {
+                                Common.ReadBytesFromImageAsHexAndSaveToFile(fileName,
+                                    bootSector.GetFatTableStartByte(i),bootSector.FatSizeInBytes(),adialog.FileName,ref aLogger);
+                                MessageBox.Show($"Done, check the file location! [{adialog.FileName}]");
+                            }
                         }
                     }
-                    richTextBox1.ResumeLayout();
-                    richTextBox1.AppendText("\n\n");
-                }
+                    else
+                    {
+                    */
+                        FatTable aFatTable = new FatTable(fileName, bootSector, $"Fat Table {i}", i);
+                        var numberOfBytesToDisplay = 512;
+
+                        richTextBox1.AppendText($"Printing FAT TABLE{i}\n\n");
+                        HexPrinter aHexPrinter = new HexPrinter(ref richTextBox1, 32, aFatTable.StartAddress, ref aLogger);
+                        richTextBox1.AppendText($"\tFirst {numberOfBytesToDisplay} bytes of FAT table {i} \n",Color.Blue);
+                        aHexPrinter.PrintValue(aFatTable.RawValue.Substring(0, numberOfBytesToDisplay*2), Color.White);
+                        
+                        richTextBox1.AppendText("\n");
+
+                        aHexPrinter = new HexPrinter(ref richTextBox1, 32, aFatTable.StartAddress + (aFatTable.RawValue.Length / 2) - numberOfBytesToDisplay, ref aLogger);
+                        richTextBox1.AppendText($"\n\tLast {numberOfBytesToDisplay} bytes of FAT table {i} \n",Color.Blue);
+                        aHexPrinter.PrintValue(aFatTable.RawValue.Substring(aFatTable.RawValue.Length - (numberOfBytesToDisplay*2), numberOfBytesToDisplay*2), Color.White);
+
+                        richTextBox1.SuspendLayout();
+                        for (int index = 0; index < aFatTable.ParsedEntries.Count; index++)
+                        {
+                            var parsedEntry = aFatTable.ParsedEntries[index];
+                            if (parsedEntry != "000000")
+                            {
+                                //richTextBox1.AppendText("\n"+parsedEntry);
+                                //0 1 2 3 4 5 
+                                //u v w x y z
+                                // xuv & yzw
+                                string fisrtEntry = parsedEntry[3].ToString() + parsedEntry[0].ToString() +
+                                                    parsedEntry[1].ToString();
+
+                                var firstEntryType = CehckFat12EntryValue(fisrtEntry);
+
+                                string secondEntry = parsedEntry[4].ToString() + parsedEntry[5].ToString() +
+                                                     parsedEntry[2].ToString();
+
+                                var firstdatalocByte = aFatTable.ParentBootSector.FirstDataSectorByte() +
+                                                        (index * 2) *
+                                                        aFatTable.ParentBootSector.GetNumberOfSectorsPerCluser() *
+                                                        aFatTable.ParentBootSector.BytesPerSector();
+                                richTextBox1.AppendText(
+                                    $"\n [{index}] {fisrtEntry}:\t {firstEntryType}  \t Data Loca={firstdatalocByte.ToString("X8")}");
+
+                                var seconddatalocByte = aFatTable.ParentBootSector.FirstDataSectorByte() +
+                                                        (index * 2 + 1) *
+                                                        aFatTable.ParentBootSector.GetNumberOfSectorsPerCluser() *
+                                                        aFatTable.ParentBootSector.BytesPerSector();
+                                var secondEntryType = CehckFat12EntryValue(secondEntry);
+                                richTextBox1.AppendText(
+                                    $"\n [{index + 1}] {secondEntry}:\t {secondEntryType}  \t Data Loca={seconddatalocByte.ToString("X8")}");
+                            }
+                            else
+                            {
+                                richTextBox1.AppendText(
+                                    $"\n reached last file (stopped to save space), two vals ={parsedEntry} ");
+                                break;
+                            }
+                        }
+                        richTextBox1.ResumeLayout();
+                        richTextBox1.AppendText("\n\n");
+                    }
+               // }
             }
         }
 

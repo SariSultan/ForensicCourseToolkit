@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForensicsCourseToolkit.exe" size="888832">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForensicsCourseToolkit.exe" size="889344">
       <assemblyIdentity name="ForensicsCourseToolkit" version="3.2.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>3aU+LAtfzJeprhojUd8MwLZEfp7PPiXAjAXmIAxmLJk=</dsig:DigestValue>
+        <dsig:DigestValue>hZX5rnMjKUXegC2+GDM8q1WwxRJTpGrWmL3Qpr3aQX0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

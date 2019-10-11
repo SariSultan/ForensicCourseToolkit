@@ -39,12 +39,19 @@ namespace ForensicsCourseToolkit.Filesystems
                 var hex = "";
                 using (var fs = new FileStream(fileName, FileMode.Open))
                 {
+                    byte[] buf = new byte[sizeToRead];
                     fs.Seek(startAddress, SeekOrigin.Begin);
+
+                    fs.Read(buf, 0, sizeToRead);
+
                     int hexIn;
-                    for (var i = 0; ((hexIn = fs.ReadByte()) != -1) && (i < sizeToRead); i++)
-                    {
-                        hex += $"{hexIn:X2}";
-                    }
+                    // for (var i = 0; ((hexIn = fs.ReadByte()) != -1) && (i < sizeToRead); i++)
+                    //for(var i=0; i<sizeToRead;i++)
+                    //{
+                    //     hex += $"{buf[i]:X2}";
+                    // }
+                   hex = BitConverter.ToString(buf).Replace("-", string.Empty);
+
                 }
                 return hex;
             }
@@ -54,8 +61,29 @@ namespace ForensicsCourseToolkit.Filesystems
                 return null;
             }
         }
+        public static bool ReadBytesFromImageAsHexAndSaveToFile(string fileName, int startAddress, int sizeToRead, string saveFileName, ref Logger aLogger)
+        {
+            try
+            {
+                using (var fs = new FileStream(fileName, FileMode.Open))
+                using (var fd = new FileStream(saveFileName, FileMode.Create))
+                {
 
-        public static void ParseStructureUnits(List<StructureUnit> aStructure, string rawHex,  Logger aLogger)
+                    byte[] buf = new byte[sizeToRead];
+                    fs.Seek(startAddress, SeekOrigin.Begin);
+
+                    fs.Read(buf, 0, sizeToRead);
+                    fd.Write(buf, 0, sizeToRead);
+                }
+            }
+            catch (Exception ex)
+            {
+                aLogger.LogMessage(ex.Message, LogMsgType.Fatal);
+                return false;
+            }
+            return false;
+        }
+        public static void ParseStructureUnits(List<StructureUnit> aStructure, string rawHex, Logger aLogger)
         {
             foreach (var unit in aStructure)
             {
@@ -96,13 +124,13 @@ namespace ForensicsCourseToolkit.Filesystems
                 var unitStartAddress = startAddress;
                 instance.Description = description;
                 instance.Logger = aLogger;
-                
+
                 if (instance is IHaveStartAddress)
                 {
                     (instance as IHaveStartAddress).StartAddress = startAddress;
                 }
                 //IF THE START ADDRESS IS -1 THEN THE FILE NAME IS THE HEX VALUE
-                instance.RawValue  = (startAddress == -1)
+                instance.RawValue = (startAddress == -1)
                     ? fileName
                     : ReadBytesFromImageAsHex(fileName, unitStartAddress, instance.Size, ref aLogger);
 

@@ -7,10 +7,10 @@ using ForensicsCourseToolkit.Helpers;
 
 namespace ForensicsCourseToolkit.Filesystems
 {
-    public class FatTable:IHaveStartAddress,IHaveCommonProps,IHaveExactSize, IHaveBootSectorParent
+    public class FatTable : IHaveStartAddress, IHaveCommonProps, IHaveExactSize, IHaveBootSectorParent
     {
-      public  List<string> ParsedEntries=new List<string>(); 
-        public FatTable(string fileName,BootSector parentBootSector, string description, int fatTableNumber)
+        public List<string> ParsedEntries = new List<string>();
+        public FatTable(string fileName, BootSector parentBootSector, string description, int fatTableNumber)
         {
             Description = description;
 
@@ -19,8 +19,8 @@ namespace ForensicsCourseToolkit.Filesystems
             StartAddress = ParentBootSector.GetFatTableStartByte(fatTableNumber);
 
             var aLogger = Logger;//to avoid var as ref
-           RawValue= Common.ReadBytesFromImageAsHex(fileName, StartAddress, ParentBootSector.FatSizeInBytes(), ref aLogger);
-            Size = RawValue.Length/2;
+            RawValue = Common.ReadBytesFromImageAsHex(fileName, StartAddress, ParentBootSector.FatSizeInBytes(), ref aLogger);
+            Size = RawValue.Length / 2;
 
             if (Size != GetExpectedSize())
             {
@@ -33,7 +33,7 @@ namespace ForensicsCourseToolkit.Filesystems
             if (parentBootSector.FatType == FatType.Fat12)
             {
                 //I already have the value as Hex so read only 3 hex no need to treat it as bytes
-                ParsedEntries= Helpers.Conversion.Split(RawValue, 6).ToList();
+                ParsedEntries = Helpers.Conversion.Split(RawValue, 6).ToList();
             }
         }
         public int StartAddress { get; set; }
